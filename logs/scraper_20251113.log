@@ -1,0 +1,415 @@
+2025-11-13 02:24:27 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 02:24:28 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 02:24:28 - src.scraper.match_scraper - INFO - 📊 Trovati 43 link partite
+2025-11-13 02:24:28 - src.scraper.match_scraper - INFO - ✅ Estratte 43 partite
+2025-11-13 02:24:28 - src.scraper.match_scraper - INFO - ✓ Estratte 43 partite
+2025-11-13 02:24:28 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 43 partite...
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [1/43] Azerbaijan vs Iceland
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [2/43] France vs Ukraine
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [3/43] Armenia vs Hungary
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [4/43] Ireland vs Portugal
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [5/43] Norway vs Estonia
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [6/43] Moldova vs Italy
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [7/43] Andorra vs Albania
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [8/43] England vs Serbia
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [9/43] UAE vs Iraq
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [10/43] Nigeria vs Gabon
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [11/43] Cameroon vs Congo DR
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [12/43] Suriname vs El Salvador
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [13/43] Penya Encarnada vs Pas de la Casa
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [14/43] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [15/43] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [16/43] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [17/43] Boyaca Chico vs Millonarios Bogota
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [18/43] Independiente Medellin vs Envigado FC
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [19/43] OC Bukavu Dawa vs New Jack
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [20/43] Blessing vs New Soger
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [21/43] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [22/43] LDU de Quito vs Deportivo Cuenca
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [23/43] Tepatitlan vs Atlante
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [24/43] Mineros de Zacatecas vs Irapuato
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [25/43] Remo Stars vs Enugu Rangers
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [26/43] Kabwe Warriors vs Green Eagles
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [27/43] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [28/43] ZESCO United vs Red Arrows
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [29/43] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [30/43] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [31/43] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [32/43] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [33/43] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [34/43] Cayman Islands vs British Virgin Islands
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [35/43] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [36/43] Hong Kong vs Cambodia
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [37/43] Thailand vs Singapore
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [38/43] Bangladesh vs Nepal
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [39/43] Iran vs Cape Verde
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [40/43] Algeria vs Zimbabwe
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [41/43] Czech Republic vs San Marino
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [42/43] Lithuania vs Israel
+2025-11-13 02:24:29 - src.scraper.match_scraper - INFO - ✓ [43/43] North Macedonia vs Latvia
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Azerbaijan vs Iceland: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting France vs Ukraine: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Armenia vs Hungary: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Ireland vs Portugal: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Norway vs Estonia: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Moldova vs Italy: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Andorra vs Albania: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting England vs Serbia: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting UAE vs Iraq: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Nigeria vs Gabon: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Cameroon vs Congo DR: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Suriname vs El Salvador: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Penya Encarnada vs Pas de la Casa: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting The Strongest La Paz vs Aurora Cochabamba: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Universitario de Vinto vs Blooming Santa Cruz: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Flambeau du Centre vs Royal Vision 2026: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Boyaca Chico vs Millonarios Bogota: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Independiente Medellin vs Envigado FC: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting OC Bukavu Dawa vs New Jack: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Blessing vs New Soger: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting FC Renaissance du Congo vs DC Motema Pembe: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting LDU de Quito vs Deportivo Cuenca: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Tepatitlan vs Atlante: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Mineros de Zacatecas vs Irapuato: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Remo Stars vs Enugu Rangers: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Kabwe Warriors vs Green Eagles: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Power Dynamos vs Kansanshi Dynamos: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting ZESCO United vs Red Arrows: unsupported operand type(s) for +: 'int' and 'TeamStanding'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Austria Lustenau (Aut) vs St. Gallen (Sui): unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel): unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Holstein Kiel (Ger) vs Silkeborg (Den): unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Karlsruher (Ger) vs Luzern (Sui): unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Twente (Ned) vs Schalke 04 (Ger): unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Cayman Islands vs British Virgin Islands: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Dominican Republic vs Saint Vincent and the Grenadines: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Hong Kong vs Cambodia: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Thailand vs Singapore: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Bangladesh vs Nepal: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Iran vs Cape Verde: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Algeria vs Zimbabwe: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Czech Republic vs San Marino: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting Lithuania vs Israel: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:24:58 - __main__ - ERROR - Error predicting North Macedonia vs Latvia: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-11-13 02:28:52 - __main__ - INFO - Impostazioni salvate
+2025-11-13 02:30:12 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 02:30:12 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 02:30:12 - src.scraper.match_scraper - INFO - 📊 Trovati 43 link partite
+2025-11-13 02:30:12 - src.scraper.match_scraper - INFO - ✅ Estratte 43 partite
+2025-11-13 02:30:12 - src.scraper.match_scraper - INFO - ✓ Estratte 43 partite
+2025-11-13 02:30:12 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 43 partite...
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [1/43] Azerbaijan vs Iceland
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [2/43] France vs Ukraine
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [3/43] Armenia vs Hungary
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [4/43] Ireland vs Portugal
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [5/43] Norway vs Estonia
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [6/43] Moldova vs Italy
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [7/43] Andorra vs Albania
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [8/43] England vs Serbia
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [9/43] UAE vs Iraq
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [10/43] Nigeria vs Gabon
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [11/43] Cameroon vs Congo DR
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [12/43] Suriname vs El Salvador
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [13/43] Penya Encarnada vs Pas de la Casa
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [14/43] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [15/43] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [16/43] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [17/43] Boyaca Chico vs Millonarios Bogota
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [18/43] Independiente Medellin vs Envigado FC
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [19/43] OC Bukavu Dawa vs New Jack
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [20/43] Blessing vs New Soger
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [21/43] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [22/43] LDU de Quito vs Deportivo Cuenca
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [23/43] Tepatitlan vs Atlante
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [24/43] Mineros de Zacatecas vs Irapuato
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [25/43] Remo Stars vs Enugu Rangers
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [26/43] Kabwe Warriors vs Green Eagles
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [27/43] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [28/43] ZESCO United vs Red Arrows
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [29/43] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [30/43] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [31/43] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [32/43] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [33/43] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [34/43] Cayman Islands vs British Virgin Islands
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [35/43] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [36/43] Hong Kong vs Cambodia
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [37/43] Thailand vs Singapore
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [38/43] Bangladesh vs Nepal
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [39/43] Iran vs Cape Verde
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [40/43] Algeria vs Zimbabwe
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [41/43] Czech Republic vs San Marino
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [42/43] Lithuania vs Israel
+2025-11-13 02:30:14 - src.scraper.match_scraper - INFO - ✓ [43/43] North Macedonia vs Latvia
+2025-11-13 02:41:25 - __main__ - INFO - Impostazioni salvate
+2025-11-13 08:08:58 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 08:08:59 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 08:08:59 - src.scraper.match_scraper - INFO - 📊 Trovati 47 link partite
+2025-11-13 08:08:59 - src.scraper.match_scraper - INFO - ✅ Estratte 47 partite
+2025-11-13 08:08:59 - src.scraper.match_scraper - INFO - ✓ Estratte 47 partite
+2025-11-13 08:08:59 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 47 partite...
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [1/47] Azerbaijan vs Iceland
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [2/47] France vs Ukraine
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [3/47] Armenia vs Hungary
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [4/47] Ireland vs Portugal
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [5/47] Norway vs Estonia
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [6/47] Moldova vs Italy
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [7/47] Andorra vs Albania
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [8/47] England vs Serbia
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [9/47] UAE vs Iraq
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [10/47] Nigeria vs Gabon
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [11/47] Cameroon vs Congo DR
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [12/47] Suriname vs El Salvador
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [13/47] Penya Encarnada vs Pas de la Casa
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [14/47] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [15/47] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [16/47] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [17/47] Boyaca Chico vs Millonarios Bogota
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [18/47] Independiente Medellin vs Envigado FC
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [19/47] OC Bukavu Dawa vs New Jack
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [20/47] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [21/47] LDU de Quito vs Deportivo Cuenca
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [22/47] Tepatitlan vs Atlante
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [23/47] Mineros de Zacatecas vs Irapuato
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [24/47] Remo Stars vs Enugu Rangers
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [25/47] Kabwe Warriors vs Green Eagles
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [26/47] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [27/47] ZESCO United vs Red Arrows
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [28/47] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [29/47] Cracovia Krakow (Pol) vs Stal Rzeszow (Pol)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [30/47] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [31/47] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [32/47] Dynamo Dresden (Ger) vs Energie Cottbus (Ger)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [33/47] Hoffenheim (Ger) vs Greuther Furth (Ger)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [34/47] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [35/47] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [36/47] Cayman Islands vs British Virgin Islands
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [37/47] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [38/47] Papua New Guinea vs Solomon Islands
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [39/47] Hong Kong vs Cambodia
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [40/47] India vs Bhutan
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [41/47] Thailand vs Singapore
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [42/47] Bangladesh vs Nepal
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [43/47] Iran vs Cape Verde
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [44/47] Algeria vs Zimbabwe
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [45/47] Czech Republic vs San Marino
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [46/47] Lithuania vs Israel
+2025-11-13 08:09:01 - src.scraper.match_scraper - INFO - ✓ [47/47] North Macedonia vs Latvia
+2025-11-13 08:11:37 - __main__ - INFO - Impostazioni salvate
+2025-11-13 08:21:33 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 08:21:33 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 08:21:33 - src.scraper.match_scraper - INFO - 📊 Trovati 47 link partite
+2025-11-13 08:21:33 - src.scraper.match_scraper - INFO - ✅ Estratte 47 partite
+2025-11-13 08:21:33 - src.scraper.match_scraper - INFO - ✓ Estratte 47 partite
+2025-11-13 08:21:33 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 47 partite...
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [1/47] Azerbaijan vs Iceland
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [2/47] France vs Ukraine
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [3/47] Armenia vs Hungary
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [4/47] Ireland vs Portugal
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [5/47] Norway vs Estonia
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [6/47] Moldova vs Italy
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [7/47] Andorra vs Albania
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [8/47] England vs Serbia
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [9/47] UAE vs Iraq
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [10/47] Nigeria vs Gabon
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [11/47] Cameroon vs Congo DR
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [12/47] Suriname vs El Salvador
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [13/47] Penya Encarnada vs Pas de la Casa
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [14/47] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [15/47] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [16/47] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [17/47] Boyaca Chico vs Millonarios Bogota
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [18/47] Independiente Medellin vs Envigado FC
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [19/47] OC Bukavu Dawa vs New Jack
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [20/47] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [21/47] LDU de Quito vs Deportivo Cuenca
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [22/47] Tepatitlan vs Atlante
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [23/47] Mineros de Zacatecas vs Irapuato
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [24/47] Remo Stars vs Enugu Rangers
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [25/47] Kabwe Warriors vs Green Eagles
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [26/47] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [27/47] ZESCO United vs Red Arrows
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [28/47] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [29/47] Cracovia Krakow (Pol) vs Stal Rzeszow (Pol)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [30/47] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [31/47] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [32/47] Dynamo Dresden (Ger) vs Energie Cottbus (Ger)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [33/47] Hoffenheim (Ger) vs Greuther Furth (Ger)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [34/47] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [35/47] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [36/47] Cayman Islands vs British Virgin Islands
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [37/47] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [38/47] Papua New Guinea vs Solomon Islands
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [39/47] Hong Kong vs Cambodia
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [40/47] India vs Bhutan
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [41/47] Thailand vs Singapore
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [42/47] Bangladesh vs Nepal
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [43/47] Iran vs Cape Verde
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [44/47] Algeria vs Zimbabwe
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [45/47] Czech Republic vs San Marino
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [46/47] Lithuania vs Israel
+2025-11-13 08:21:35 - src.scraper.match_scraper - INFO - ✓ [47/47] North Macedonia vs Latvia
+2025-11-13 08:23:40 - __main__ - INFO - Impostazioni salvate
+2025-11-13 08:37:40 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 08:37:40 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 08:37:40 - src.scraper.match_scraper - INFO - 📊 Trovati 47 link partite
+2025-11-13 08:37:40 - src.scraper.match_scraper - INFO - ✅ Estratte 47 partite
+2025-11-13 08:37:40 - src.scraper.match_scraper - INFO - ✓ Estratte 47 partite
+2025-11-13 08:37:40 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 47 partite...
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [1/47] Azerbaijan vs Iceland
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [2/47] France vs Ukraine
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [3/47] Armenia vs Hungary
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [4/47] Ireland vs Portugal
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [5/47] Norway vs Estonia
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [6/47] Moldova vs Italy
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [7/47] Andorra vs Albania
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [8/47] England vs Serbia
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [9/47] UAE vs Iraq
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [10/47] Nigeria vs Gabon
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [11/47] Cameroon vs Congo DR
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [12/47] Suriname vs El Salvador
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [13/47] Penya Encarnada vs Pas de la Casa
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [14/47] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [15/47] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [16/47] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [17/47] Boyaca Chico vs Millonarios Bogota
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [18/47] Independiente Medellin vs Envigado FC
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [19/47] OC Bukavu Dawa vs New Jack
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [20/47] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [21/47] LDU de Quito vs Deportivo Cuenca
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [22/47] Tepatitlan vs Atlante
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [23/47] Mineros de Zacatecas vs Irapuato
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [24/47] Remo Stars vs Enugu Rangers
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [25/47] Kabwe Warriors vs Green Eagles
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [26/47] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [27/47] ZESCO United vs Red Arrows
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [28/47] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [29/47] Cracovia Krakow (Pol) vs Stal Rzeszow (Pol)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [30/47] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [31/47] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [32/47] Dynamo Dresden (Ger) vs Energie Cottbus (Ger)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [33/47] Hoffenheim (Ger) vs Greuther Furth (Ger)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [34/47] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [35/47] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [36/47] Cayman Islands vs British Virgin Islands
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [37/47] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [38/47] Papua New Guinea vs Solomon Islands
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [39/47] Hong Kong vs Cambodia
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [40/47] India vs Bhutan
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [41/47] Thailand vs Singapore
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [42/47] Bangladesh vs Nepal
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [43/47] Iran vs Cape Verde
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [44/47] Algeria vs Zimbabwe
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [45/47] Czech Republic vs San Marino
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [46/47] Lithuania vs Israel
+2025-11-13 08:37:42 - src.scraper.match_scraper - INFO - ✓ [47/47] North Macedonia vs Latvia
+2025-11-13 08:41:42 - __main__ - INFO - Impostazioni salvate
+2025-11-13 18:04:18 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 18:04:18 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 18:04:18 - src.scraper.match_scraper - INFO - 📊 Trovati 48 link partite
+2025-11-13 18:04:18 - src.scraper.match_scraper - INFO - ✅ Estratte 48 partite
+2025-11-13 18:04:18 - src.scraper.match_scraper - INFO - ✓ Estratte 48 partite
+2025-11-13 18:04:18 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 48 partite...
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [1/48] Azerbaijan vs Iceland
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [2/48] France vs Ukraine
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [3/48] Armenia vs Hungary
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [4/48] Ireland vs Portugal
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [5/48] Norway vs Estonia
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [6/48] Moldova vs Italy
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [7/48] Andorra vs Albania
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [8/48] England vs Serbia
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [9/48] UAE vs Iraq
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [10/48] Nigeria vs Gabon
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [11/48] Cameroon vs Congo DR
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [12/48] Suriname vs El Salvador
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [13/48] Penya Encarnada vs Pas de la Casa
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [14/48] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [15/48] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [16/48] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [17/48] Boyaca Chico vs Millonarios Bogota
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [18/48] Independiente Medellin vs Envigado FC
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [19/48] OC Bukavu Dawa vs New Jack
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [20/48] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [21/48] LDU de Quito vs Deportivo Cuenca
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [22/48] Tepatitlan vs Atlante
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [23/48] Mineros de Zacatecas vs Irapuato
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [24/48] Remo Stars vs Enugu Rangers
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [25/48] Kabwe Warriors vs Green Eagles
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [26/48] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [27/48] ZESCO United vs Red Arrows
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [28/48] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [29/48] Cracovia Krakow (Pol) vs Stal Rzeszow (Pol)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [30/48] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [31/48] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [32/48] Dynamo Dresden (Ger) vs Energie Cottbus (Ger)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [33/48] Hoffenheim (Ger) vs Greuther Furth (Ger)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [34/48] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [35/48] Udinese (Ita) vs NK Primorje Ajdocina (Svn)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [36/48] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [37/48] Cayman Islands vs British Virgin Islands
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [38/48] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [39/48] Papua New Guinea vs Solomon Islands
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [40/48] Hong Kong vs Cambodia
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [41/48] India vs Bhutan
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [42/48] Thailand vs Singapore
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [43/48] Bangladesh vs Nepal
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [44/48] Iran vs Cape Verde
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [45/48] Algeria vs Zimbabwe
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [46/48] Czech Republic vs San Marino
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [47/48] Lithuania vs Israel
+2025-11-13 18:04:20 - src.scraper.match_scraper - INFO - ✓ [48/48] North Macedonia vs Latvia
+2025-11-13 18:06:40 - __main__ - INFO - Impostazioni salvate
+2025-11-13 22:33:43 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-13 22:33:44 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-13 22:33:44 - src.scraper.match_scraper - INFO - 📊 Trovati 48 link partite
+2025-11-13 22:33:44 - src.scraper.match_scraper - INFO - ✅ Estratte 48 partite
+2025-11-13 22:33:44 - src.scraper.match_scraper - INFO - ✓ Estratte 48 partite
+2025-11-13 22:33:44 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 48 partite...
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [1/48] Azerbaijan vs Iceland
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [2/48] France vs Ukraine
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [3/48] Armenia vs Hungary
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [4/48] Ireland vs Portugal
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [5/48] Norway vs Estonia
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [6/48] Moldova vs Italy
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [7/48] Andorra vs Albania
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [8/48] England vs Serbia
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [9/48] UAE vs Iraq
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [10/48] Nigeria vs Gabon
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [11/48] Cameroon vs Congo DR
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [12/48] Suriname vs El Salvador
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [13/48] Penya Encarnada vs Pas de la Casa
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [14/48] The Strongest La Paz vs Aurora Cochabamba
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [15/48] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [16/48] Flambeau du Centre vs Royal Vision 2026
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [17/48] Boyaca Chico vs Millonarios Bogota
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [18/48] Independiente Medellin vs Envigado FC
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [19/48] OC Bukavu Dawa vs New Jack
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [20/48] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [21/48] LDU de Quito vs Deportivo Cuenca
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [22/48] Tepatitlan vs Atlante
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [23/48] Mineros de Zacatecas vs Irapuato
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [24/48] Remo Stars vs Enugu Rangers
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [25/48] Kabwe Warriors vs Green Eagles
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [26/48] Power Dynamos vs Kansanshi Dynamos
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [27/48] ZESCO United vs Red Arrows
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [28/48] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [29/48] Cracovia Krakow (Pol) vs Stal Rzeszow (Pol)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [30/48] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [31/48] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [32/48] Dynamo Dresden (Ger) vs Energie Cottbus (Ger)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [33/48] Hoffenheim (Ger) vs Greuther Furth (Ger)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [34/48] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [35/48] Udinese (Ita) vs NK Primorje Ajdocina (Svn)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [36/48] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [37/48] Cayman Islands vs British Virgin Islands
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [38/48] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [39/48] Papua New Guinea vs Solomon Islands
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [40/48] Hong Kong vs Cambodia
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [41/48] India vs Bhutan
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [42/48] Thailand vs Singapore
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [43/48] Bangladesh vs Nepal
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [44/48] Iran vs Cape Verde
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [45/48] Algeria vs Zimbabwe
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [46/48] Czech Republic vs San Marino
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [47/48] Lithuania vs Israel
+2025-11-13 22:33:46 - src.scraper.match_scraper - INFO - ✓ [48/48] North Macedonia vs Latvia
+2025-11-13 22:36:50 - __main__ - INFO - Impostazioni salvate

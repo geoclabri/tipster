@@ -1,0 +1,18 @@
+2025-11-10 23:33:07 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-10-11-2025
+2025-11-10 23:33:07 - src.scraper.match_scraper - WARNING - Container principale non trovato
+2025-11-10 23:33:07 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista
+2025-11-10 23:33:10 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-11-11-2025
+2025-11-10 23:33:10 - src.scraper.match_scraper - WARNING - Container principale non trovato
+2025-11-10 23:33:10 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista
+2025-11-10 23:33:45 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-15-11-2025
+2025-11-10 23:33:45 - src.scraper.match_scraper - WARNING - Container principale non trovato
+2025-11-10 23:33:45 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista
+2025-11-10 23:33:50 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-17-11-2025
+2025-11-10 23:33:50 - src.scraper.match_scraper - WARNING - Container principale non trovato
+2025-11-10 23:33:50 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista
+2025-11-10 23:40:19 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-10-11-2025
+2025-11-10 23:40:19 - src.scraper.match_scraper - INFO - Trovati 42 elementi partita
+2025-11-10 23:40:19 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista
+2025-11-10 23:40:22 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-11-11-2025
+2025-11-10 23:40:22 - src.scraper.match_scraper - INFO - Trovati 32 elementi partita
+2025-11-10 23:40:22 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista

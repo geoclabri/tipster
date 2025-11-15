@@ -1,0 +1,488 @@
+{
+  "malawi/super-league": {
+    "completed_percentage": 76.0,
+    "total_matches": 240,
+    "finished": 182,
+    "remaining": 58,
+    "home_win_pct": 45.0,
+    "draw_pct": 26.0,
+    "away_win_pct": 29.0,
+    "avg_goals": 2.08,
+    "avg_home_goals": 1.23,
+    "avg_away_goals": 0.85,
+    "bts_pct": 35.0,
+    "over_under": {
+      "1.5": {
+        "under": 42.0,
+        "over": 58.0
+      },
+      "2.5": {
+        "under": 65.0,
+        "over": 35.0
+      },
+      "3.5": {
+        "under": 81.0,
+        "over": 19.0
+      }
+    }
+  },
+  "spain/primera-division-rfef-group-2": {
+    "completed_percentage": 29.0,
+    "total_matches": 380,
+    "finished": 112,
+    "remaining": 268,
+    "home_win_pct": 43.0,
+    "draw_pct": 37.0,
+    "away_win_pct": 21.0,
+    "avg_goals": 2.04,
+    "avg_home_goals": 1.17,
+    "avg_away_goals": 0.88,
+    "bts_pct": 47.0,
+    "over_under": {
+      "1.5": {
+        "under": 37.0,
+        "over": 63.0
+      },
+      "2.5": {
+        "under": 63.0,
+        "over": 37.0
+      },
+      "3.5": {
+        "under": 88.0,
+        "over": 12.0
+      }
+    }
+  },
+  "brazil/serie-b": {
+    "completed_percentage": 95.0,
+    "total_matches": 380,
+    "finished": 361,
+    "remaining": 19,
+    "home_win_pct": 45.0,
+    "draw_pct": 30.0,
+    "away_win_pct": 24.0,
+    "avg_goals": 2.23,
+    "avg_home_goals": 1.29,
+    "avg_away_goals": 0.94,
+    "bts_pct": 50.0,
+    "over_under": {
+      "1.5": {
+        "under": 33.0,
+        "over": 67.0
+      },
+      "2.5": {
+        "under": 60.0,
+        "over": 40.0
+      },
+      "3.5": {
+        "under": 83.0,
+        "over": 17.0
+      }
+    }
+  },
+  "portugal/liga-portugal-2": {
+    "completed_percentage": 31.0,
+    "total_matches": 306,
+    "finished": 96,
+    "remaining": 210,
+    "home_win_pct": 38.0,
+    "draw_pct": 30.0,
+    "away_win_pct": 32.0,
+    "avg_goals": 2.54,
+    "avg_home_goals": 1.31,
+    "avg_away_goals": 1.23,
+    "bts_pct": 52.0,
+    "over_under": {
+      "1.5": {
+        "under": 26.0,
+        "over": 74.0
+      },
+      "2.5": {
+        "under": 55.0,
+        "over": 45.0
+      },
+      "3.5": {
+        "under": 72.0,
+        "over": 28.0
+      }
+    }
+  },
+  "italy/serie-c-group-a": {
+    "completed_percentage": 35.0,
+    "total_matches": 380,
+    "finished": 132,
+    "remaining": 248,
+    "home_win_pct": 36.0,
+    "draw_pct": 33.0,
+    "away_win_pct": 32.0,
+    "avg_goals": 2.32,
+    "avg_home_goals": 1.26,
+    "avg_away_goals": 1.06,
+    "bts_pct": 52.0,
+    "over_under": {
+      "1.5": {
+        "under": 31.0,
+        "over": 69.0
+      },
+      "2.5": {
+        "under": 57.0,
+        "over": 43.0
+      },
+      "3.5": {
+        "under": 78.0,
+        "over": 22.0
+      }
+    }
+  },
+  "russia/first-league": {
+    "completed_percentage": 54.0,
+    "total_matches": 306,
+    "finished": 166,
+    "remaining": 140,
+    "home_win_pct": 42.0,
+    "draw_pct": 33.0,
+    "away_win_pct": 25.0,
+    "avg_goals": 2.3,
+    "avg_home_goals": 1.3,
+    "avg_away_goals": 1.0,
+    "bts_pct": 48.0,
+    "over_under": {
+      "1.5": {
+        "under": 33.0,
+        "over": 67.0
+      },
+      "2.5": {
+        "under": 61.0,
+        "over": 39.0
+      },
+      "3.5": {
+        "under": 78.0,
+        "over": 22.0
+      }
+    }
+  },
+  "brazil/serie-a": {
+    "completed_percentage": 86.0,
+    "total_matches": 380,
+    "finished": 328,
+    "remaining": 52,
+    "home_win_pct": 49.0,
+    "draw_pct": 27.0,
+    "away_win_pct": 24.0,
+    "avg_goals": 2.43,
+    "avg_home_goals": 1.46,
+    "avg_away_goals": 0.97,
+    "bts_pct": 47.0,
+    "over_under": {
+      "1.5": {
+        "under": 30.0,
+        "over": 70.0
+      },
+      "2.5": {
+        "under": 56.0,
+        "over": 44.0
+      },
+      "3.5": {
+        "under": 77.0,
+        "over": 23.0
+      }
+    }
+  },
+  "kenya/premier-league": {
+    "completed_percentage": 23.0,
+    "total_matches": 306,
+    "finished": 70,
+    "remaining": 236,
+    "home_win_pct": 26.0,
+    "draw_pct": 33.0,
+    "away_win_pct": 41.0,
+    "avg_goals": 1.97,
+    "avg_home_goals": 0.94,
+    "avg_away_goals": 1.03,
+    "bts_pct": 43.0,
+    "over_under": {
+      "1.5": {
+        "under": 39.0,
+        "over": 61.0
+      },
+      "2.5": {
+        "under": 66.0,
+        "over": 34.0
+      },
+      "3.5": {
+        "under": 87.0,
+        "over": 13.0
+      }
+    }
+  },
+  "ukraine/first-league": {
+    "completed_percentage": 50.0,
+    "total_matches": 240,
+    "finished": 121,
+    "remaining": 119,
+    "home_win_pct": 38.0,
+    "draw_pct": 25.0,
+    "away_win_pct": 37.0,
+    "avg_goals": 2.23,
+    "avg_home_goals": 1.12,
+    "avg_away_goals": 1.12,
+    "bts_pct": 40.0,
+    "over_under": {
+      "1.5": {
+        "under": 31.0,
+        "over": 69.0
+      },
+      "2.5": {
+        "under": 62.0,
+        "over": 38.0
+      },
+      "3.5": {
+        "under": 85.0,
+        "over": 15.0
+      }
+    }
+  },
+  "greece/super-league-2": {
+    "completed_percentage": 24.0,
+    "total_matches": 380,
+    "finished": 93,
+    "remaining": 287,
+    "home_win_pct": 39.0,
+    "draw_pct": 25.0,
+    "away_win_pct": 37.0,
+    "avg_goals": 2.39,
+    "avg_home_goals": 1.34,
+    "avg_away_goals": 1.04,
+    "bts_pct": 43.0,
+    "over_under": {
+      "1.5": {
+        "under": 35.0,
+        "over": 65.0
+      },
+      "2.5": {
+        "under": 61.0,
+        "over": 39.0
+      },
+      "3.5": {
+        "under": 77.0,
+        "over": 23.0
+      }
+    }
+  },
+  "spain/segunda-division": {
+    "completed_percentage": 31.0,
+    "total_matches": 462,
+    "finished": 145,
+    "remaining": 317,
+    "home_win_pct": 44.0,
+    "draw_pct": 29.0,
+    "away_win_pct": 27.0,
+    "avg_goals": 2.54,
+    "avg_home_goals": 1.43,
+    "avg_away_goals": 1.12,
+    "bts_pct": 53.0,
+    "over_under": {
+      "1.5": {
+        "under": 36.0,
+        "over": 64.0
+      },
+      "2.5": {
+        "under": 52.0,
+        "over": 48.0
+      },
+      "3.5": {
+        "under": 71.0,
+        "over": 29.0
+      }
+    }
+  },
+  "andorra/primera-divisio": {
+    "completed_percentage": 19.0,
+    "total_matches": 135,
+    "finished": 26,
+    "remaining": 109,
+    "home_win_pct": 42.0,
+    "draw_pct": 27.0,
+    "away_win_pct": 31.0,
+    "avg_goals": 2.46,
+    "avg_home_goals": 1.35,
+    "avg_away_goals": 1.12,
+    "bts_pct": 46.0,
+    "over_under": {
+      "1.5": {
+        "under": 23.0,
+        "over": 77.0
+      },
+      "2.5": {
+        "under": 54.0,
+        "over": 46.0
+      },
+      "3.5": {
+        "under": 81.0,
+        "over": 19.0
+      }
+    }
+  },
+  "italy/serie-c-group-b": {
+    "completed_percentage": 36.0,
+    "total_matches": 380,
+    "finished": 136,
+    "remaining": 244,
+    "home_win_pct": 38.0,
+    "draw_pct": 26.0,
+    "away_win_pct": 36.0,
+    "avg_goals": 2.27,
+    "avg_home_goals": 1.15,
+    "avg_away_goals": 1.12,
+    "bts_pct": 45.0,
+    "over_under": {
+      "1.5": {
+        "under": 35.0,
+        "over": 65.0
+      },
+      "2.5": {
+        "under": 62.0,
+        "over": 38.0
+      },
+      "3.5": {
+        "under": 82.0,
+        "over": 18.0
+      }
+    }
+  },
+  "bulgaria/second-pfl": {
+    "completed_percentage": 44.0,
+    "total_matches": 272,
+    "finished": 121,
+    "remaining": 151,
+    "home_win_pct": 43.0,
+    "draw_pct": 28.0,
+    "away_win_pct": 29.0,
+    "avg_goals": 2.39,
+    "avg_home_goals": 1.4,
+    "avg_away_goals": 0.99,
+    "bts_pct": 45.0,
+    "over_under": {
+      "1.5": {
+        "under": 31.0,
+        "over": 69.0
+      },
+      "2.5": {
+        "under": 60.0,
+        "over": 40.0
+      },
+      "3.5": {
+        "under": 79.0,
+        "over": 21.0
+      }
+    }
+  },
+  "nigeria/npfl": {
+    "completed_percentage": 31.0,
+    "total_matches": 380,
+    "finished": 119,
+    "remaining": 261,
+    "home_win_pct": 56.0,
+    "draw_pct": 28.0,
+    "away_win_pct": 16.0,
+    "avg_goals": 1.77,
+    "avg_home_goals": 1.18,
+    "avg_away_goals": 0.59,
+    "bts_pct": 36.0,
+    "over_under": {
+      "1.5": {
+        "under": 44.0,
+        "over": 56.0
+      },
+      "2.5": {
+        "under": 77.0,
+        "over": 23.0
+      },
+      "3.5": {
+        "under": 92.0,
+        "over": 8.0
+      }
+    }
+  },
+  "spain/primera-division-rfef-group-1": {
+    "completed_percentage": 30.0,
+    "total_matches": 380,
+    "finished": 114,
+    "remaining": 266,
+    "home_win_pct": 45.0,
+    "draw_pct": 32.0,
+    "away_win_pct": 24.0,
+    "avg_goals": 2.17,
+    "avg_home_goals": 1.25,
+    "avg_away_goals": 0.92,
+    "bts_pct": 42.0,
+    "over_under": {
+      "1.5": {
+        "under": 33.0,
+        "over": 67.0
+      },
+      "2.5": {
+        "under": 63.0,
+        "over": 37.0
+      },
+      "3.5": {
+        "under": 82.0,
+        "over": 18.0
+      }
+    }
+  },
+  "congo-dr/linafoot": {
+    "completed_percentage": 8.0,
+    "total_matches": 930,
+    "finished": 76,
+    "remaining": 854,
+    "home_win_pct": 51.0,
+    "draw_pct": 28.0,
+    "away_win_pct": 21.0,
+    "avg_goals": 2.17,
+    "avg_home_goals": 1.34,
+    "avg_away_goals": 0.83,
+    "bts_pct": 43.0,
+    "over_under": {
+      "1.5": {
+        "under": 33.0,
+        "over": 67.0
+      },
+      "2.5": {
+        "under": 55.0,
+        "over": 45.0
+      },
+      "3.5": {
+        "under": 89.0,
+        "over": 11.0
+      }
+    }
+  },
+  "italy/serie-c-group-c": {
+    "completed_percentage": 35.0,
+    "total_matches": 380,
+    "finished": 134,
+    "remaining": 246,
+    "home_win_pct": 42.0,
+    "draw_pct": 28.0,
+    "away_win_pct": 31.0,
+    "avg_goals": 2.61,
+    "avg_home_goals": 1.51,
+    "avg_away_goals": 1.1,
+    "bts_pct": 49.0,
+    "over_under": {
+      "1.5": {
+        "under": 28.0,
+        "over": 72.0
+      },
+      "2.5": {
+        "under": 48.0,
+        "over": 52.0
+      },
+      "3.5": {
+        "under": 72.0,
+        "over": 28.0
+      }
+    }
+  }
+}

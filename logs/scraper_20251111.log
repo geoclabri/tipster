@@ -1,0 +1,216 @@
+2025-11-11 09:42:48 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/matches/date-11-11-2025
+2025-11-11 09:42:49 - src.scraper.match_scraper - INFO - Trovati 30 elementi partita
+2025-11-11 09:42:49 - src.scraper.match_scraper - INFO - Estratte 0 partite dalla lista
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/switch/matches/date-11-11-2025
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - Trovate 10 tabelle di partite
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Forest Green vs Tamworth
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ York City vs Rochdale
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Barnsley vs Lincoln
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Bristol Rovers vs Plymouth
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Burton Albion vs Crewe
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Doncaster vs Bradford
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Gillingham vs Wycombe
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Milton Keynes Dons vs Swindon
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Newport County vs Exeter
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Northampton vs Shrewsbury
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Oldham vs Bolton
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Port Vale vs Fleetwood
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Stockport vs Wigan
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Tranmere Rovers vs Blackpool
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Bromley vs Wimbledon
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Crawley vs Peterborough
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Alloa Athletic vs Clyde
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Cove Rangers vs Forfar Athletic
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Dumbarton vs Stenhousemuir
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ East Fife vs Edinburgh City
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Stirling Albion vs Peterhead
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Inter Bratislava vs MFK Skalica
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Argentinos Juniors- Belgrano Cordoba vs Unknown
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Independiente Rivadavia vs Central Cordoba
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Independiente Medellin** vs Envigado FC
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Maniema Union vs AC Rangers
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Simba Kolwezi vs TP Mazembe
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Aucas Quito- Delfin Manta vs Unknown
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Al-Ahli SC Doha vs Al-Wakrah SC
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - ✓ Zamora Barinas vs Academia Puerto Cabello
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - Estratte 30 partite dalla lista
+2025-11-11 09:54:00 - src.scraper.match_scraper - INFO - Ritorno 30 partite con quote 1X2
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/switch/matches/date-12-11-2025
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - Trovate 10 tabelle di partite
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Forest Green vs Tamworth
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ York City vs Rochdale
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Barnsley vs Lincoln
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Bristol Rovers vs Plymouth
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Burton Albion vs Crewe
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Doncaster vs Bradford
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Gillingham vs Wycombe
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Milton Keynes Dons vs Swindon
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Newport County vs Exeter
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Northampton vs Shrewsbury
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Oldham vs Bolton
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Port Vale vs Fleetwood
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Stockport vs Wigan
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Tranmere Rovers vs Blackpool
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Bromley vs Wimbledon
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Crawley vs Peterborough
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Alloa Athletic vs Clyde
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Cove Rangers vs Forfar Athletic
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Dumbarton vs Stenhousemuir
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ East Fife vs Edinburgh City
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Stirling Albion vs Peterhead
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Inter Bratislava vs MFK Skalica
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Argentinos Juniors- Belgrano Cordoba vs Unknown
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Independiente Rivadavia vs Central Cordoba
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Independiente Medellin** vs Envigado FC
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Maniema Union vs AC Rangers
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Simba Kolwezi vs TP Mazembe
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Aucas Quito- Delfin Manta vs Unknown
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Al-Ahli SC Doha vs Al-Wakrah SC
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - ✓ Zamora Barinas vs Academia Puerto Cabello
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - Estratte 30 partite dalla lista
+2025-11-11 09:54:27 - src.scraper.match_scraper - INFO - Ritorno 30 partite con quote 1X2
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - Richiesta a: https://tipsterarea.com/switch/matches/date-13-11-2025
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - Trovate 10 tabelle di partite
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Forest Green vs Tamworth
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ York City vs Rochdale
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Barnsley vs Lincoln
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Bristol Rovers vs Plymouth
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Burton Albion vs Crewe
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Doncaster vs Bradford
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Gillingham vs Wycombe
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Milton Keynes Dons vs Swindon
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Newport County vs Exeter
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Northampton vs Shrewsbury
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Oldham vs Bolton
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Port Vale vs Fleetwood
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Stockport vs Wigan
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Tranmere Rovers vs Blackpool
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Bromley vs Wimbledon
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Crawley vs Peterborough
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Alloa Athletic vs Clyde
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Cove Rangers vs Forfar Athletic
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Dumbarton vs Stenhousemuir
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ East Fife vs Edinburgh City
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Stirling Albion vs Peterhead
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Inter Bratislava vs MFK Skalica
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Argentinos Juniors- Belgrano Cordoba vs Unknown
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Independiente Rivadavia vs Central Cordoba
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Independiente Medellin** vs Envigado FC
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Maniema Union vs AC Rangers
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Simba Kolwezi vs TP Mazembe
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Aucas Quito- Delfin Manta vs Unknown
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Al-Ahli SC Doha vs Al-Wakrah SC
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - ✓ Zamora Barinas vs Academia Puerto Cabello
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - Estratte 30 partite dalla lista
+2025-11-11 09:54:39 - src.scraper.match_scraper - INFO - Ritorno 30 partite con quote 1X2
+2025-11-11 10:22:47 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-11-11-2025
+2025-11-11 10:22:47 - src.scraper.match_scraper - WARNING - Nessuna tabella trovata
+2025-11-11 10:22:47 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-11 22:03:38 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-11-11-2025
+2025-11-11 22:03:38 - src.scraper.match_scraper - WARNING - Nessuna tabella trovata
+2025-11-11 22:03:38 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-11 22:03:42 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-11 22:03:42 - src.scraper.match_scraper - WARNING - Nessuna tabella trovata
+2025-11-11 22:03:42 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-11 22:59:17 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/switch/matches/date-11-11-2025
+2025-11-11 22:59:18 - src.scraper.match_scraper - INFO - Trovate 10 tabelle
+2025-11-11 22:59:18 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-11 22:59:18 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [1/30] Forest Green- Tamworth vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [2/30] York City- Rochdale vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [3/30] Barnsley -Lincoln vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [4/30] Bristol Rovers- Plymouth vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [5/30] Burton Albion -Crewe vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [6/30] Doncaster- Bradford vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [7/30] Gillingham -Wycombe vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [8/30] Milton Keynes Dons -Swindon vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [9/30] Newport County -Exeter vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [10/30] Northampton- Shrewsbury vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [11/30] Oldham -Bolton vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [12/30] Port Vale vs Fleetwood**
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [13/30] Stockport vs Wigan
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [14/30] Tranmere Rovers- Blackpool vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [15/30] Bromley -Wimbledon vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [16/30] Crawley -Peterborough vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [17/30] Alloa Athletic vs Clyde
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [18/30] Cove Rangers -Forfar Athletic vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [19/30] Dumbarton vs Stenhousemuir
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [20/30] East Fife- Edinburgh City vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [21/30] Stirling Albion- Peterhead vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [22/30] Inter Bratislava -MFK Skalica vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [23/30] Argentinos Juniors- Belgrano Cordoba vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [24/30] Independiente Rivadavia vs Central Cordoba
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [25/30] Independiente Medellin** vs Envigado FC
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [26/30] Maniema Union vs AC Rangers
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [27/30] Simba Kolwezi vs TP Mazembe
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [28/30] Aucas Quito- Delfin Manta vs Unknown
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [29/30] Al-Ahli SC Doha vs Al-Wakrah SC
+2025-11-11 22:59:19 - src.scraper.match_scraper - INFO - ✓ [30/30] Zamora Barinas vs Academia Puerto Cabello
+2025-11-11 23:00:42 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/switch/matches/date-12-11-2025
+2025-11-11 23:00:42 - src.scraper.match_scraper - INFO - Trovate 10 tabelle
+2025-11-11 23:00:42 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-11 23:00:42 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [1/30] Forest Green- Tamworth vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [2/30] York City- Rochdale vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [3/30] Barnsley -Lincoln vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [4/30] Bristol Rovers- Plymouth vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [5/30] Burton Albion -Crewe vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [6/30] Doncaster- Bradford vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [7/30] Gillingham -Wycombe vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [8/30] Milton Keynes Dons -Swindon vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [9/30] Newport County -Exeter vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [10/30] Northampton- Shrewsbury vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [11/30] Oldham -Bolton vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [12/30] Port Vale vs Fleetwood**
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [13/30] Stockport vs Wigan
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [14/30] Tranmere Rovers- Blackpool vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [15/30] Bromley -Wimbledon vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [16/30] Crawley -Peterborough vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [17/30] Alloa Athletic vs Clyde
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [18/30] Cove Rangers -Forfar Athletic vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [19/30] Dumbarton vs Stenhousemuir
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [20/30] East Fife- Edinburgh City vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [21/30] Stirling Albion- Peterhead vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [22/30] Inter Bratislava -MFK Skalica vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [23/30] Argentinos Juniors- Belgrano Cordoba vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [24/30] Independiente Rivadavia vs Central Cordoba
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [25/30] Independiente Medellin** vs Envigado FC
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [26/30] Maniema Union vs AC Rangers
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [27/30] Simba Kolwezi vs TP Mazembe
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [28/30] Aucas Quito- Delfin Manta vs Unknown
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [29/30] Al-Ahli SC Doha vs Al-Wakrah SC
+2025-11-11 23:00:43 - src.scraper.match_scraper - INFO - ✓ [30/30] Zamora Barinas vs Academia Puerto Cabello
+2025-11-11 23:00:59 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/switch/matches/date-13-11-2025
+2025-11-11 23:01:00 - src.scraper.match_scraper - INFO - Trovate 10 tabelle
+2025-11-11 23:01:00 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-11 23:01:00 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [1/30] Forest Green- Tamworth vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [2/30] York City- Rochdale vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [3/30] Barnsley -Lincoln vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [4/30] Bristol Rovers- Plymouth vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [5/30] Burton Albion -Crewe vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [6/30] Doncaster- Bradford vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [7/30] Gillingham -Wycombe vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [8/30] Milton Keynes Dons -Swindon vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [9/30] Newport County -Exeter vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [10/30] Northampton- Shrewsbury vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [11/30] Oldham -Bolton vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [12/30] Port Vale vs Fleetwood**
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [13/30] Stockport vs Wigan
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [14/30] Tranmere Rovers- Blackpool vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [15/30] Bromley -Wimbledon vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [16/30] Crawley -Peterborough vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [17/30] Alloa Athletic vs Clyde
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [18/30] Cove Rangers -Forfar Athletic vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [19/30] Dumbarton vs Stenhousemuir
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [20/30] East Fife- Edinburgh City vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [21/30] Stirling Albion- Peterhead vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [22/30] Inter Bratislava -MFK Skalica vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [23/30] Argentinos Juniors- Belgrano Cordoba vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [24/30] Independiente Rivadavia vs Central Cordoba
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [25/30] Independiente Medellin** vs Envigado FC
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [26/30] Maniema Union vs AC Rangers
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [27/30] Simba Kolwezi vs TP Mazembe
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [28/30] Aucas Quito- Delfin Manta vs Unknown
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [29/30] Al-Ahli SC Doha vs Al-Wakrah SC
+2025-11-11 23:01:01 - src.scraper.match_scraper - INFO - ✓ [30/30] Zamora Barinas vs Academia Puerto Cabello

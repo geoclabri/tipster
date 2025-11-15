@@ -1,0 +1,440 @@
+2025-11-12 09:53:27 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 09:53:28 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-12 09:53:36 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 09:53:36 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-12 09:53:41 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-12 09:53:41 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-12 09:56:48 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 09:56:48 - src.scraper.match_scraper - INFO - Usando parser NUOVA struttura (<a class='game'>)
+2025-11-12 09:56:48 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-12 15:48:49 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 15:48:49 - src.scraper.match_scraper - WARNING - Container #contentContainer non trovato
+2025-11-12 15:48:49 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-12 15:58:43 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 15:58:43 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 15:58:43 - src.scraper.match_scraper - INFO - ✓ Estratte 0 partite
+2025-11-12 16:13:33 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 16:13:33 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 16:13:33 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 16:13:33 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 16:13:33 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 16:13:33 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 16:13:34 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:05:18 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:05:19 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:05:19 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:05:19 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:05:19 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:05:19 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:05:20 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:06:16 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:06:17 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:06:17 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:06:17 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:06:17 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:06:17 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:06:18 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:06:55 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:06:55 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:06:55 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:06:55 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:06:55 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:06:55 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:06:56 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:07:39 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:07:39 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:07:39 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:07:39 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:07:39 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:07:39 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:07:40 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:18:21 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:18:21 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:18:21 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:18:21 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:18:21 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:18:21 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:18:22 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:19:56 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-12 22:19:56 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:19:56 - src.scraper.match_scraper - INFO - 📊 Trovati 43 link partite
+2025-11-12 22:19:56 - src.scraper.match_scraper - INFO - ✅ Estratte 43 partite
+2025-11-12 22:19:56 - src.scraper.match_scraper - INFO - ✓ Estratte 43 partite
+2025-11-12 22:19:56 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 43 partite...
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [1/43] Azerbaijan vs Iceland
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [2/43] France vs Ukraine
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [3/43] Armenia vs Hungary
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [4/43] Ireland vs Portugal
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [5/43] Norway vs Estonia
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [6/43] Moldova vs Italy
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [7/43] Andorra vs Albania
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [8/43] England vs Serbia
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [9/43] UAE vs Iraq
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [10/43] Nigeria vs Gabon
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [11/43] Cameroon vs Congo DR
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [12/43] Suriname vs El Salvador
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [13/43] Penya Encarnada vs Pas de la Casa
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [14/43] The Strongest La Paz vs Aurora Cochabamba
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [15/43] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [16/43] Flambeau du Centre vs Royal Vision 2026
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [17/43] Boyaca Chico vs Millonarios Bogota
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [18/43] Independiente Medellin vs Envigado FC
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [19/43] OC Bukavu Dawa vs New Jack
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [20/43] Blessing vs New Soger
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [21/43] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [22/43] LDU de Quito vs Deportivo Cuenca
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [23/43] Tepatitlan vs Atlante
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [24/43] Mineros de Zacatecas vs Irapuato
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [25/43] Remo Stars vs Enugu Rangers
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [26/43] Kabwe Warriors vs Green Eagles
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [27/43] Power Dynamos vs Kansanshi Dynamos
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [28/43] ZESCO United vs Red Arrows
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [29/43] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [30/43] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [31/43] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [32/43] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [33/43] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [34/43] Cayman Islands vs British Virgin Islands
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [35/43] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [36/43] Hong Kong vs Cambodia
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [37/43] Thailand vs Singapore
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [38/43] Bangladesh vs Nepal
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [39/43] Iran vs Cape Verde
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [40/43] Algeria vs Zimbabwe
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [41/43] Czech Republic vs San Marino
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [42/43] Lithuania vs Israel
+2025-11-12 22:19:58 - src.scraper.match_scraper - INFO - ✓ [43/43] North Macedonia vs Latvia
+2025-11-12 22:20:52 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:20:52 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:20:52 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:20:52 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:20:52 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:20:52 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:20:53 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:32:49 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:32:50 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:32:50 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:32:50 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:32:50 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:32:50 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:32:51 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:33:26 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-13-11-2025
+2025-11-12 22:33:26 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:33:26 - src.scraper.match_scraper - INFO - 📊 Trovati 43 link partite
+2025-11-12 22:33:26 - src.scraper.match_scraper - INFO - ✅ Estratte 43 partite
+2025-11-12 22:33:26 - src.scraper.match_scraper - INFO - ✓ Estratte 43 partite
+2025-11-12 22:33:26 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 43 partite...
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [1/43] Azerbaijan vs Iceland
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [2/43] France vs Ukraine
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [3/43] Armenia vs Hungary
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [4/43] Ireland vs Portugal
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [5/43] Norway vs Estonia
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [6/43] Moldova vs Italy
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [7/43] Andorra vs Albania
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [8/43] England vs Serbia
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [9/43] UAE vs Iraq
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [10/43] Nigeria vs Gabon
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [11/43] Cameroon vs Congo DR
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [12/43] Suriname vs El Salvador
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [13/43] Penya Encarnada vs Pas de la Casa
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [14/43] The Strongest La Paz vs Aurora Cochabamba
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [15/43] Universitario de Vinto vs Blooming Santa Cruz
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [16/43] Flambeau du Centre vs Royal Vision 2026
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [17/43] Boyaca Chico vs Millonarios Bogota
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [18/43] Independiente Medellin vs Envigado FC
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [19/43] OC Bukavu Dawa vs New Jack
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [20/43] Blessing vs New Soger
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [21/43] FC Renaissance du Congo vs DC Motema Pembe
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [22/43] LDU de Quito vs Deportivo Cuenca
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [23/43] Tepatitlan vs Atlante
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [24/43] Mineros de Zacatecas vs Irapuato
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [25/43] Remo Stars vs Enugu Rangers
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [26/43] Kabwe Warriors vs Green Eagles
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [27/43] Power Dynamos vs Kansanshi Dynamos
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [28/43] ZESCO United vs Red Arrows
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [29/43] Austria Lustenau (Aut) vs St. Gallen (Sui)
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [30/43] Borussia M'gladbach (Ger) vs K. Lierse S.K. (Bel)
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [31/43] Holstein Kiel (Ger) vs Silkeborg (Den)
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [32/43] Karlsruher (Ger) vs Luzern (Sui)
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [33/43] Twente (Ned) vs Schalke 04 (Ger)
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [34/43] Cayman Islands vs British Virgin Islands
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [35/43] Dominican Republic vs Saint Vincent and the Grenadines
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [36/43] Hong Kong vs Cambodia
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [37/43] Thailand vs Singapore
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [38/43] Bangladesh vs Nepal
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [39/43] Iran vs Cape Verde
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [40/43] Algeria vs Zimbabwe
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [41/43] Czech Republic vs San Marino
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [42/43] Lithuania vs Israel
+2025-11-12 22:33:28 - src.scraper.match_scraper - INFO - ✓ [43/43] North Macedonia vs Latvia
+2025-11-12 22:33:57 - __main__ - INFO - Impostazioni salvate
+2025-11-12 22:34:08 - __main__ - INFO - Impostazioni salvate
+2025-11-12 22:46:23 - src.scraper.match_scraper - INFO - 📥 Richiesta: https://tipsterarea.com/matches/date-12-11-2025
+2025-11-12 22:46:24 - src.scraper.match_scraper - INFO - ✓ Trovato container #games
+2025-11-12 22:46:24 - src.scraper.match_scraper - INFO - 📊 Trovati 30 link partite
+2025-11-12 22:46:24 - src.scraper.match_scraper - INFO - ✅ Estratte 30 partite
+2025-11-12 22:46:24 - src.scraper.match_scraper - INFO - ✓ Estratte 30 partite
+2025-11-12 22:46:24 - src.scraper.match_scraper - INFO - 📊 Download dettagli per 30 partite...
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [1/30] Zamora CF vs Ourense
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [2/30] Slonim-2017 vs Neman Grodno
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [3/30] Borac Banja Luka vs Zrinjski Mostar
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [4/30] Zbrojovka Brno vs Hradec Kralove
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [5/30] Livyi Bereh Kyiv vs FC Chernihiv
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [6/30] San Antonio Bulo Bulo vs Always Ready La Paz
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [7/30] Nacional Potosi vs Oriente Petrolero
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [8/30] Atletico MG vs Fortaleza CE
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [9/30] Muzinga vs Le Messager FC de Ngozi
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [10/30] Aigle Noir Makamba vs BG Green Farmers
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [11/30] Bumamuru vs Vital'O FC
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [12/30] Garage Express vs Musongati
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [13/30] Kayanza United vs Rukinzo
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [14/30] Ngozi City vs Inter Star
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [15/30] Burundi Sport Dynamik vs Olympique Star
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [16/30] La Equidad Bogota vs Deportivo Pereira
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [17/30] Maniema Union vs AC Rangers
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [18/30] MK Etancheite vs Celeste Mbandaka
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [19/30] US Tshinkunku vs Panda Likasi
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [20/30] Etoile de Kivu vs Dauphins Noirs
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [21/30] Les Aigles du Congo vs AS Vita Club
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [22/30] Deportivo Achuapa vs Marquense
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [23/30] Tunisia vs Mauritania
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [24/30] Russia vs Peru
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [25/30] Barbados vs Bonaire
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [26/30] Dominica vs Saint Martin
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [27/30] Cuba vs Saint Lucia
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [28/30] Bahamas vs Anguilla
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [29/30] Antigua and Barbuda vs Aruba
+2025-11-12 22:46:25 - src.scraper.match_scraper - INFO - ✓ [30/30] Saint Kitts and Nevis vs Sint Maarten
+2025-11-12 22:47:10 - __main__ - INFO - Impostazioni salvate
