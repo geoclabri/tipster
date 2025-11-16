@@ -26,6 +26,16 @@ class MatchScraper:
     
     BASE_URL = "https://tipsterarea.com"
     
+    # DIZIONARIO ECCEZIONI: nome_visualizzato -> chiave_url
+    LEAGUE_URL_EXCEPTIONS = {
+        # El Salvador
+        'el salvador - primera division apertura': 'el-salvador',
+        'el salvador - primera division clausura': 'el-salvador',
+        'argentina - liga profesional clausura': 'argentina',
+        # Aggiungi altri campionati problematici qui
+        # 'nome completo nella lista': 'chiave-url-corretta',
+    }
+    
     def __init__(self, config):
         self.config = config
         self.session = None
@@ -271,18 +281,27 @@ class MatchScraper:
     
     def _league_name_to_key(self, league_name: str) -> str:
         """
-        Converte nome campionato in chiave URL
+        Converte nome campionato in chiave URL con gestione eccezioni
         "England - Premier League" -> "england/premier-league"
         "Italy - Serie C - Group B" -> "italy/serie-c-group-b"
+        "El Salvador - Primera Division Apertura" -> "el-salvador" (eccezione)
         """
-        league_name = league_name.strip()
+        league_name_original = league_name.strip()
+        league_name_lower = league_name_original.lower()
         
+        # CONTROLLA ECCEZIONI
+        if league_name_lower in self.LEAGUE_URL_EXCEPTIONS:
+            exception_key = self.LEAGUE_URL_EXCEPTIONS[league_name_lower]
+            logger.info(f"🔧 Eccezione trovata: '{league_name_original}' -> '{exception_key}'")
+            return exception_key
+        
+        # LOGICA STANDARD
         # Split su " - " (può essere multiplo per gironi)
-        parts = league_name.split(' - ')
+        parts = league_name_original.split(' - ')
         
         if len(parts) < 2:
-            logger.warning(f"⚠️ Formato campionato inaspettato: {league_name}")
-            return league_name.lower().replace(' ', '-')
+            logger.warning(f"⚠️ Formato campionato inaspettato: {league_name_original}")
+            return league_name_original.lower().replace(' ', '-')
         
         # Primo elemento = paese
         country = parts[0].strip().lower().replace(' ', '-')
@@ -757,9 +776,7 @@ class MatchScraper:
                     match.home_stats.home_stats.draws = team_data['draws']
                     match.home_stats.home_stats.losses = team_data['losses']
                     
-                    # 🔍 DEBUG
-                    logger.info(f"🎯 {match.home_team}: home_stats.home_stats.goals_for = {team_data['goals_for']}")
-                    break
+                    logger.info(f"🎯 {match.home_team}: Home GF={team_data['goals_for']}, GA={team_data['goals_against']}")
         
         if away_standings:
             for team_data in away_standings:
@@ -780,9 +797,7 @@ class MatchScraper:
                     match.away_stats.away_stats.draws = team_data['draws']
                     match.away_stats.away_stats.losses = team_data['losses']
                     
-                    # 🔍 DEBUG
-                    logger.info(f"🎯 {match.away_team}: away_stats.away_stats.goals_for = {team_data['goals_for']}")
-                    break
+                    logger.info(f"🎯 {match.away_team}: Away GF={team_data['goals_for']}, GA={team_data['goals_against']}")
         
         # 2. STATISTICS
         statistics = self.league_statistics_cache.get(league_key, {})
@@ -820,54 +835,178 @@ class MatchScraper:
     # ========== PARSING ODDS ==========
     
     def _extract_all_odds(self, soup) -> MatchOdds:
-        """Estrae tutte le quote dalla pagina singola"""
+        """Estrae tutte le quote da tutte le tabelle odds"""
         odds = MatchOdds()
         
         try:
+            # TROVA TUTTE LE TABELLE ODDS
             odds_tables = soup.find_all('table', class_='odds')
             
-            for table in odds_tables:
-                thead = table.find('thead')
-                if not thead:
-                    continue
+            if not odds_tables:
+                logger.warning("⚠️ Nessuna tabella odds trovata")
+                return odds
+            
+            logger.info(f"📊 Trovate {len(odds_tables)} tabelle odds")
+            
+            # PROCESSA OGNI TABELLA
+            for table_idx, table in enumerate(odds_tables):
+                try:
+                    # Identifica tipo di mercato dall'header
+                    thead = table.find('thead')
+                    if not thead:
+                        continue
+                    
+                    # Prima riga header
+                    header_row = thead.find('tr')
+                    if not header_row:
+                        continue
+                    
+                    # Primo th contiene il tipo di mercato
+                    market_th = header_row.find('th', class_='odds-type')
+                    if not market_th:
+                        market_th = header_row.find('th')
+                    
+                    if not market_th:
+                        continue
+                    
+                    market_type = market_th.get_text(strip=True).lower()
+                    logger.info(f"  📋 Tabella {table_idx + 1}: {market_type}")
+                    
+                    # Estrai header colonne
+                    headers = []
+                    for th in header_row.find_all('th'):
+                        headers.append(th.get_text(strip=True).lower())
+                    
+                    # Trova bookmaker preferito
+                    tbody = table.find('tbody')
+                    if not tbody:
+                        continue
+                    
+                    preferred_row = None
+                    
+                    # Cerca: bwin > bet365 > 1xbet > primo
+                    for bookmaker in ['bwin', 'bet365', '1xbet']:
+                        for row in tbody.find_all('tr'):
+                            cells = row.find_all('td')
+                            if not cells:
+                                continue
+                            
+                            first_cell = cells[0]
+                            
+                            # Controlla testo
+                            if bookmaker in first_cell.get_text(strip=True).lower():
+                                preferred_row = row
+                                break
+                            
+                            # Controlla immagine
+                            img = first_cell.find('img', class_='bookie')
+                            if img and bookmaker in img.get('alt', '').lower():
+                                preferred_row = row
+                                break
+                        
+                        if preferred_row:
+                            break
+                    
+                    # Fallback: prima riga
+                    if not preferred_row:
+                        preferred_row = tbody.find('tr')
+                    
+                    if not preferred_row:
+                        continue
+                    
+                    # Estrai valori in base al tipo di mercato
+                    cells = preferred_row.find_all('td', class_='odd')
+                    
+                    if not cells:
+                        continue
+                    
+                    # === 1X2 ===
+                    if 'standard 1x2' in market_type or market_type == '1x2':
+                        if len(cells) >= 3:
+                            try:
+                                odds.home_win = float(cells[0].get_text(strip=True))
+                                odds.draw = float(cells[1].get_text(strip=True))
+                                odds.away_win = float(cells[2].get_text(strip=True))
+                                logger.info(f"    ✅ 1X2: {odds.home_win} / {odds.draw} / {odds.away_win}")
+                            except:
+                                pass
+                    
+                    # === DOUBLE CHANCE ===
+                    elif 'double chance' in market_type:
+                        if len(cells) >= 3:
+                            try:
+                                odds.dc_1x = float(cells[0].get_text(strip=True))
+                                odds.dc_12 = float(cells[1].get_text(strip=True))
+                                odds.dc_x2 = float(cells[2].get_text(strip=True))
+                                logger.info(f"    ✅ DC: {odds.dc_1x} / {odds.dc_12} / {odds.dc_x2}")
+                            except:
+                                pass
+                    
+                    # === OVER/UNDER ===
+                    elif 'over/under' in market_type or 'goals' in market_type:
+                        # Ogni riga ha: threshold | under | over
+                        for row in tbody.find_all('tr'):
+                            row_cells = row.find_all('td')
+                            if len(row_cells) < 4:
+                                continue
+                            
+                            # Controlla bookmaker
+                            first_cell = row_cells[0]
+                            is_preferred = False
+                            
+                            for bookmaker in ['bwin', 'bet365', '1xbet']:
+                                if bookmaker in first_cell.get_text(strip=True).lower():
+                                    is_preferred = True
+                                    break
+                                img = first_cell.find('img')
+                                if img and bookmaker in img.get('alt', '').lower():
+                                    is_preferred = True
+                                    break
+                            
+                            if not is_preferred and tbody.find_all('tr').index(row) != 0:
+                                continue
+                            
+                            try:
+                                threshold = row_cells[1].get_text(strip=True)
+                                under_val = float(row_cells[2].get_text(strip=True))
+                                over_val = float(row_cells[3].get_text(strip=True))
+                                
+                                if '1.5' in threshold:
+                                    odds.under_1_5 = under_val
+                                    odds.over_1_5 = over_val
+                                    logger.info(f"    ✅ O/U 1.5: {under_val} / {over_val}")
+                                elif '2.5' in threshold:
+                                    odds.under_2_5 = under_val
+                                    odds.over_2_5 = over_val
+                                    logger.info(f"    ✅ O/U 2.5: {under_val} / {over_val}")
+                                elif '3.5' in threshold:
+                                    odds.under_3_5 = under_val
+                                    odds.over_3_5 = over_val
+                                    logger.info(f"    ✅ O/U 3.5: {under_val} / {over_val}")
+                            except:
+                                pass
+                    
+                    # === BTS (Both Teams to Score) ===
+                    elif 'bts' in market_type or 'both teams' in market_type:
+                        if len(cells) >= 2:
+                            try:
+                                odds.bts_yes = float(cells[0].get_text(strip=True))
+                                odds.bts_no = float(cells[1].get_text(strip=True))
+                                logger.info(f"    ✅ BTS: Yes={odds.bts_yes} / No={odds.bts_no}")
+                            except:
+                                pass
                 
-                odds_type_th = thead.find('th', class_='odds-type')
-                if not odds_type_th:
-                    continue
-                
-                market_type = odds_type_th.get_text(strip=True).lower()
-                tbody = table.find('tbody')
-                if not tbody:
-                    continue
-                
-                # Cerca riga bwin (o prima riga)
-                bwin_row = None
-                for row in tbody.find_all('tr'):
-                    img = row.find('img', class_='bookie')
-                    if img and 'bwin' in img.get('alt', '').lower():
-                        bwin_row = row
-                        break
-                
-                if not bwin_row:
-                    bwin_row = tbody.find('tr')
-                
-                if not bwin_row:
-                    continue
-                
-                # Parse in base al tipo di mercato
-                if 'standard 1x2' in market_type or '1x2' in market_type:
-                    self._parse_1x2_odds(bwin_row, odds)
-                elif 'double chance' in market_type:
-                    self._parse_double_chance(bwin_row, odds)
-                elif 'over/under' in market_type:
-                    self._parse_over_under(tbody, odds)
-                elif 'bts' in market_type or 'both teams' in market_type:
-                    self._parse_bts(bwin_row, odds)
+                except Exception as e:
+                    logger.error(f"    ❌ Errore tabella {table_idx + 1}: {e}")
+            
+            if odds.home_win > 0:
+                odds.bookmakers_count = 1
         
         except Exception as e:
-            logger.error(f"❌ Errore estrazione quote: {e}")
+            logger.error(f"❌ Errore estrazione quote: {e}", exc_info=True)
         
         return odds
+
     
     def _parse_1x2_odds(self, row, odds: MatchOdds):
         try:

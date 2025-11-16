@@ -6,6 +6,7 @@ Interfaccia grafica professionale con salvataggio layout
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog, scrolledtext
 from datetime import datetime, timedelta
+from typing import List, Optional
 import asyncio
 import threading
 from pathlib import Path
@@ -15,7 +16,7 @@ import json
 sys.path.insert(0, str(Path(__file__).parent))
 
 from src.scraper.match_scraper import MatchScraper
-from src.models.match_data import MatchCollection
+from src.models.match_data import MatchCollection, Match, MatchOdds, TeamStats, TeamStanding
 from src.utils.config import Config
 from src.utils.logger import setup_logger
 from src.analysis.prediction_engine import PredictionEngine, MatchPrediction
@@ -89,9 +90,14 @@ class AnalyticaBetGUI:
         '1X': 'Double Chance: Home win or Draw',
         '12': 'Double Chance: Home or Away win (no draw)',
         'X2': 'Double Chance: Draw or Away win',
+        'U1.5': 'Under 1.5 goals odds',
         'O1.5': 'Over 1.5 goals odds',
+        'U2.5': 'Under 2.5 goals odds',
         'O2.5': 'Over 2.5 goals odds',
+        'U3.5': 'Under 3.5 goals odds',
         'O3.5': 'Over 3.5 goals odds',
+        'GG': 'Both Teams to Score - Yes (Goal/Goal)',
+        'NG': 'Both Teams to Score - No (No Goal)',
         'H_Pos': 'Home team league position',
         'A_Pos': 'Away team league position',
         'H_Pts': 'Home team total points',
@@ -101,13 +107,9 @@ class AnalyticaBetGUI:
         'A_GF': 'Away team goals scored (overall)',
         'A_GS': 'Away team goals conceded (overall)',
         'H_GF_Home': 'Home team goals scored at home',
+        'H_GS_Home': 'Home team goals conceded at home',
         'A_GF_Away': 'Away team goals scored away',
-        'H_GF_L5': 'Home team goals scored (last 5 matches)',
-        'H_GS_L5': 'Home team goals conceded (last 5 matches)',
-        'A_GF_L5': 'Away team goals scored (last 5 matches)',
-        'A_GS_L5': 'Away team goals conceded (last 5 matches)',
-        'H_GF_H_L5': 'Home team goals scored at home (last 5 home matches)',
-        'A_GF_A_L5': 'Away team goals scored away (last 5 away matches)',
+        'A_GS_Away': 'Away team goals conceded away',
         'Form H': 'Home team form (W=Win, D=Draw, L=Loss)',
         'Form A': 'Away team form (W=Win, D=Draw, L=Loss)'
     }
@@ -143,6 +145,181 @@ class AnalyticaBetGUI:
         
         # Salva impostazioni alla chiusura
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+        # === CARICA CACHE AUTOMATICAMENTE ===
+        self.root.after(500, self.try_load_cache)
+    
+    def get_cache_filepath(self, date: datetime) -> Path:
+        """Ritorna path del file cache per una data"""
+        cache_dir = Path("cache")
+        cache_dir.mkdir(exist_ok=True)
+        
+        filename = f"matches_{date.strftime('%Y-%m-%d')}.json"
+        return cache_dir / filename
+    
+    def save_matches_to_cache(self, matches: List[Match], date: datetime):
+        """Salva match in cache JSON"""
+        try:
+            filepath = self.get_cache_filepath(date)
+            
+            collection = MatchCollection(matches)
+            collection.to_json(str(filepath))
+            
+            logger.info(f"💾 Cache salvata: {filepath}")
+            self.status_var.set(f"Cache saved: {filepath.name}")
+        except Exception as e:
+            logger.error(f"❌ Errore salvataggio cache: {e}")
+    
+    def load_matches_from_cache(self, date: datetime) -> Optional[List[Match]]:
+        """Carica match da cache se disponibile"""
+        try:
+            filepath = self.get_cache_filepath(date)
+            
+            if not filepath.exists():
+                logger.info(f"ℹ️ Nessuna cache trovata per {date.strftime('%Y-%m-%d')}")
+                return None
+            
+            # Controlla età file (opzionale: cache valida solo se < 24h)
+            file_age_hours = (datetime.now().timestamp() - filepath.stat().st_mtime) / 3600
+            if file_age_hours > 24:
+                logger.info(f"⚠️ Cache troppo vecchia ({file_age_hours:.1f}h), ignorata")
+                return None
+            
+            # Carica JSON
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            # Converti dict -> Match objects
+            matches = []
+            for match_dict in data.get('matches', []):
+                match = self._dict_to_match(match_dict)
+                if match:
+                    matches.append(match)
+            
+            logger.info(f"✅ Caricati {len(matches)} match da cache")
+            return matches
+        
+        except Exception as e:
+            logger.error(f"❌ Errore caricamento cache: {e}")
+            return None
+    
+    def _dict_to_match(self, data: dict) -> Optional[Match]:
+        """Converte dizionario JSON in oggetto Match"""
+        try:
+            # Parse date/time
+            date = datetime.strptime(data['date'], '%Y-%m-%d')
+            time = datetime.strptime(data['time'], '%H:%M')
+            time = date.replace(hour=time.hour, minute=time.minute)
+            
+            # Crea Match
+            match = Match(
+                url=data['url'],
+                date=date,
+                time=time,
+                league=data['league'],
+                home_team=data['home_team'],
+                away_team=data['away_team']
+            )
+            
+            # Odds
+            if data.get('odds'):
+                odds_data = data['odds']
+                match.odds = MatchOdds(
+                    home_win=odds_data.get('home_win', 0),
+                    draw=odds_data.get('draw', 0),
+                    away_win=odds_data.get('away_win', 0),
+                    dc_1x=odds_data.get('dc_1x', 0),
+                    dc_12=odds_data.get('dc_12', 0),
+                    dc_x2=odds_data.get('dc_x2', 0),
+                    over_1_5=odds_data.get('over_1_5', 0),
+                    under_1_5=odds_data.get('under_1_5', 0),
+                    over_2_5=odds_data.get('over_2_5', 0),
+                    under_2_5=odds_data.get('under_2_5', 0),
+                    over_3_5=odds_data.get('over_3_5', 0),
+                    under_3_5=odds_data.get('under_3_5', 0),
+                    bts_yes=odds_data.get('bts_yes', 0),
+                    bts_no=odds_data.get('bts_no', 0),
+                    bookmakers_count=odds_data.get('bookmakers_count', 0)
+                )
+            
+            # Home standing
+            if data.get('home_standing'):
+                hs = data['home_standing']
+                match.home_standing = TeamStanding(
+                    position=hs.get('position', 0),
+                    team_name=hs.get('team_name', ''),
+                    matches_played=hs.get('matches_played', 0),
+                    wins=hs.get('wins', 0),
+                    draws=hs.get('draws', 0),
+                    losses=hs.get('losses', 0),
+                    goals_for=hs.get('goals_for', 0),
+                    goals_against=hs.get('goals_against', 0),
+                    goal_difference=hs.get('goal_difference', 0),
+                    points=hs.get('points', 0)
+                )
+            
+            # Away standing
+            if data.get('away_standing'):
+                aws = data['away_standing']
+                match.away_standing = TeamStanding(
+                    position=aws.get('position', 0),
+                    team_name=aws.get('team_name', ''),
+                    matches_played=aws.get('matches_played', 0),
+                    wins=aws.get('wins', 0),
+                    draws=aws.get('draws', 0),
+                    losses=aws.get('losses', 0),
+                    goals_for=aws.get('goals_for', 0),
+                    goals_against=aws.get('goals_against', 0),
+                    goal_difference=aws.get('goal_difference', 0),
+                    points=aws.get('points', 0)
+                )
+            
+            # Home stats
+            if data.get('home_stats'):
+                match.home_stats = self._dict_to_team_stats(data['home_stats'])
+            
+            # Away stats
+            if data.get('away_stats'):
+                match.away_stats = self._dict_to_team_stats(data['away_stats'])
+            
+            # Last matches
+            match.home_last_matches = data.get('home_last_matches', [])
+            match.away_last_matches = data.get('away_last_matches', [])
+            
+            # League data
+            match.league_standings = data.get('league_standings', [])
+            match.league_statistics = data.get('league_statistics', {})
+            match.head_to_head = data.get('head_to_head', [])
+            
+            return match
+        
+        except Exception as e:
+            logger.error(f"❌ Errore conversione match: {e}")
+            return None
+    
+    def _dict_to_team_stats(self, data: dict) -> TeamStats:
+        """Converte dict in TeamStats"""
+        stats = TeamStats(
+            wins=data.get('wins', 0),
+            draws=data.get('draws', 0),
+            losses=data.get('losses', 0),
+            goals_for=data.get('goals_for', 0),
+            goals_against=data.get('goals_against', 0),
+            avg_goals_scored=data.get('avg_goals_scored', 0),
+            avg_goals_conceded=data.get('avg_goals_conceded', 0),
+            bts_percentage=data.get('bts_percentage', 0),
+            over_1_5_percentage=data.get('over_1_5_percentage', 0),
+            over_2_5_percentage=data.get('over_2_5_percentage', 0),
+            over_3_5_percentage=data.get('over_3_5_percentage', 0)
+        )
+        
+        # Nested home/away stats
+        if data.get('home_stats'):
+            stats.home_stats = self._dict_to_team_stats(data['home_stats'])
+        if data.get('away_stats'):
+            stats.away_stats = self._dict_to_team_stats(data['away_stats'])
+        
+        return stats
         
     def load_settings(self):
         """Carica impostazioni da file JSON"""
@@ -195,6 +372,39 @@ class AnalyticaBetGUI:
             self.filter_no_odds_var.set(self.settings['filters'].get('hide_no_odds', False))
             self.filter_no_stats_var.set(self.settings['filters'].get('hide_no_stats', False))
     
+    def try_load_cache(self):
+        """Prova a caricare cache per la data corrente"""
+        try:
+            # Ottieni data selezionata
+            if hasattr(self, 'calendar'):
+                date_str = self.calendar.get_date()
+            else:
+                date_str = self.date_var.get().strip()
+            
+            target_date = datetime.strptime(date_str, '%Y-%m-%d')
+            
+            # Carica cache
+            cached_matches = self.load_matches_from_cache(target_date)
+            
+            if cached_matches:
+                # Chiedi conferma
+                result = messagebox.askyesno(
+                    "Cache Found",
+                    f"Found {len(cached_matches)} cached matches for {date_str}.\n\n"
+                    "Load from cache?\n\n"
+                    "(Click 'No' to download fresh data)",
+                    icon='question'
+                )
+                
+                if result:
+                    # Carica da cache
+                    self.matches = cached_matches
+                    self.on_scraping_complete(cached_matches)
+                    self.progress_var.set("✅ Loaded from cache")
+                    self.status_var.set(f"Cache loaded: {len(cached_matches)} matches")
+        
+        except Exception as e:
+            logger.debug(f"Nessuna cache da caricare: {e}")
     
     def on_closing(self):
         """Gestisce chiusura applicazione"""
@@ -300,7 +510,7 @@ class AnalyticaBetGUI:
         self.root.geometry(f'{width}x{height}+{x}+{y}')
         
     def create_widgets(self):
-        """Crea interfaccia moderna"""
+        """Crea interfaccia moderna e compatta"""
         
         # ===== HEADER =====
         header_frame = ttk.Frame(self.root, padding="15", style='Card.TFrame')
@@ -318,97 +528,51 @@ class AnalyticaBetGUI:
         
         ttk.Separator(self.root, orient='horizontal').pack(fill=tk.X, padx=10)
         
-        # ===== CONTROLLI =====
-        controls_frame = ttk.LabelFrame(self.root, text="⚙️ Controls", padding="15")
-        controls_frame.pack(fill=tk.X, padx=10, pady=10)
+        # ===== PANNELLO SUPERIORE: DATA + STATISTICHE + CONTROLLI =====
+        top_panel = ttk.Frame(self.root, padding="10")
+        top_panel.pack(fill=tk.X, padx=10, pady=5)
         
-        # Riga 1: Data
-        date_frame = ttk.Frame(controls_frame)
-        date_frame.pack(fill=tk.X, pady=8)
+        # --- SINISTRA: Calendario ---
+        left_section = ttk.LabelFrame(top_panel, text="📅 Select Date", padding="10")
+        left_section.pack(side=tk.LEFT, padx=5, fill=tk.BOTH, expand=False)
         
-        ttk.Label(date_frame, text="📅 Date:", style='Header.TLabel').pack(side=tk.LEFT, padx=5)
+        # Importa calendario
+        try:
+            from tkcalendar import Calendar
+            
+            self.calendar = Calendar(
+                left_section,
+                selectmode='day',
+                date_pattern='yyyy-mm-dd',
+                background=self.COLORS['secondary'],
+                foreground='white',
+                selectbackground=self.COLORS['accent'],
+                selectforeground='white',
+                normalbackground=self.COLORS['bg_light'],
+                normalforeground=self.COLORS['text_dark'],
+                weekendbackground=self.COLORS['row_odd'],
+                weekendforeground=self.COLORS['text_dark'],
+                headersbackground=self.COLORS['primary'],
+                headersforeground='white',
+                borderwidth=2,
+                font=('Segoe UI', 9)
+            )
+            self.calendar.pack(padx=5, pady=5)
+            
+        except ImportError:
+            # Fallback se tkcalendar non installato
+            ttk.Label(left_section, text="⚠️ Install tkcalendar:\npip install tkcalendar",
+                     foreground=self.COLORS['accent']).pack(padx=10, pady=10)
+            
+            # Entry manuale come backup
+            self.date_var = tk.StringVar(value=datetime.now().strftime('%Y-%m-%d'))
+            ttk.Entry(left_section, textvariable=self.date_var, width=12).pack(pady=5)
         
-        self.date_var = tk.StringVar(value=datetime.now().strftime('%Y-%m-%d'))
-        date_entry = ttk.Entry(date_frame, textvariable=self.date_var, 
-                              width=15, font=('Segoe UI', 10))
-        date_entry.pack(side=tk.LEFT, padx=5)
+        # --- CENTRO: Statistiche compatte ---
+        center_section = ttk.LabelFrame(top_panel, text="📊 Statistics", padding="10")
+        center_section.pack(side=tk.LEFT, padx=5, fill=tk.BOTH, expand=False)
         
-        ttk.Button(date_frame, text="Today", 
-                  command=lambda: self.date_var.set(datetime.now().strftime('%Y-%m-%d')),
-                  width=10).pack(side=tk.LEFT, padx=2)
-        ttk.Button(date_frame, text="Tomorrow",
-                  command=lambda: self.date_var.set((datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')),
-                  width=10).pack(side=tk.LEFT, padx=2)
-        
-        self.download_details_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(
-            date_frame,
-            text="📊 Download complete details (odds, stats, standings)",
-            variable=self.download_details_var
-        ).pack(side=tk.LEFT, padx=20)
-        
-        # Riga 2: Bottone principale
-        button_frame = ttk.Frame(controls_frame)
-        button_frame.pack(pady=10)
-        
-        self.scrape_button = ttk.Button(
-            button_frame,
-            text="🔄 UPDATE MATCHES",
-            command=self.start_scraping,
-            style='Big.TButton',
-            width=40
-        )
-        self.scrape_button.pack()
-        
-        # Riga 3: FILTRI INTELLIGENTI
-        filters_frame = ttk.Frame(controls_frame)
-        filters_frame.pack(pady=10)
-        
-        ttk.Label(filters_frame, text="🔍 Smart Filters:", 
-                 style='Header.TLabel').pack(side=tk.LEFT, padx=10)
-        
-        # Checkbox filtri
-        self.filter_no_odds_var = tk.BooleanVar(value=False)
-        self.filter_no_stats_var = tk.BooleanVar(value=False)
-        
-        self.filter_no_odds_check = ttk.Checkbutton(
-            filters_frame,
-            text="Hide matches without odds",
-            variable=self.filter_no_odds_var,
-            command=self.apply_filters
-        )
-        self.filter_no_odds_check.pack(side=tk.LEFT, padx=5)
-        
-        self.filter_no_stats_check = ttk.Checkbutton(
-            filters_frame,
-            text="Hide matches without statistics",
-            variable=self.filter_no_stats_var,
-            command=self.apply_filters
-        )
-        self.filter_no_stats_check.pack(side=tk.LEFT, padx=5)
-        
-        # Bottone reset filtri
-        ttk.Button(filters_frame, text="↻ Reset Filters",
-                  command=self.reset_filters,
-                  style='Action.TButton',
-                  width=15).pack(side=tk.LEFT, padx=10)
-        
-        # Progress
-        progress_frame = ttk.Frame(controls_frame)
-        progress_frame.pack(fill=tk.X, pady=5)
-        
-        self.progress_var = tk.StringVar(value="Ready")
-        ttk.Label(progress_frame, textvariable=self.progress_var,
-                 font=('Segoe UI', 9, 'italic')).pack()
-        
-        self.progress_bar = ttk.Progressbar(progress_frame, mode='indeterminate', length=800)
-        self.progress_bar.pack(pady=5)
-        
-        # ===== STATISTICHE =====
-        stats_frame = ttk.LabelFrame(self.root, text="📈 Statistics", padding="12")
-        stats_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        stats_grid = ttk.Frame(stats_frame)
+        stats_grid = ttk.Frame(center_section)
         stats_grid.pack()
         
         self.stats_labels = {}
@@ -417,21 +581,77 @@ class AnalyticaBetGUI:
             ('leagues', 'Leagues:', '0', self.COLORS['secondary']),
             ('with_odds', 'With Odds:', '0', self.COLORS['success']),
             ('with_stats', 'With Stats:', '0', self.COLORS['warning']),
-            ('with_standing', 'With Standings:', '0', self.COLORS['accent']),
         ]
         
         for i, (key, label, default, color) in enumerate(stats_items):
-            row = i // 3
-            col = (i % 3) * 2
+            row = i // 2
+            col = (i % 2) * 2
             
-            label_widget = ttk.Label(stats_grid, text=label, font=('Segoe UI', 10, 'bold'))
-            label_widget.grid(row=row, column=col, sticky=tk.W, padx=10, pady=5)
+            label_widget = ttk.Label(stats_grid, text=label, font=('Segoe UI', 9, 'bold'))
+            label_widget.grid(row=row, column=col, sticky=tk.W, padx=5, pady=3)
             
             value_label = tk.Label(stats_grid, text=default, 
-                                  font=('Segoe UI', 11, 'bold'),
+                                  font=('Segoe UI', 10, 'bold'),
                                   fg=color, bg=self.COLORS['bg_light'])
-            value_label.grid(row=row, column=col+1, sticky=tk.W, padx=5, pady=5)
+            value_label.grid(row=row, column=col+1, sticky=tk.W, padx=5, pady=3)
             self.stats_labels[key] = value_label
+        
+        # --- DESTRA: Controlli ---
+        right_section = ttk.LabelFrame(top_panel, text="⚙️ Controls", padding="10")
+        right_section.pack(side=tk.LEFT, padx=5, fill=tk.BOTH, expand=True)
+        
+        # Download details
+        self.download_details_var = tk.BooleanVar(value=True)
+        ttk.Checkbutton(
+            right_section,
+            text="📊 Download complete details (odds, stats, standings)",
+            variable=self.download_details_var
+        ).pack(anchor=tk.W, pady=5)
+        
+        # Filtri
+        ttk.Label(right_section, text="🔍 Smart Filters:", 
+                 style='Header.TLabel').pack(anchor=tk.W, pady=(10, 5))
+        
+        self.filter_no_odds_var = tk.BooleanVar(value=False)
+        self.filter_no_stats_var = tk.BooleanVar(value=False)
+        
+        ttk.Checkbutton(
+            right_section,
+            text="Hide matches without odds",
+            variable=self.filter_no_odds_var,
+            command=self.apply_filters
+        ).pack(anchor=tk.W, pady=2)
+        
+        ttk.Checkbutton(
+            right_section,
+            text="Hide matches without statistics",
+            variable=self.filter_no_stats_var,
+            command=self.apply_filters
+        ).pack(anchor=tk.W, pady=2)
+        
+        # Bottone principale
+        button_frame = ttk.Frame(right_section)
+        button_frame.pack(pady=10)
+        
+        self.scrape_button = ttk.Button(
+            button_frame,
+            text="🔄 UPDATE MATCHES",
+            command=self.start_scraping,
+            style='Big.TButton',
+            width=30
+        )
+        self.scrape_button.pack()
+        
+        # Progress
+        progress_frame = ttk.Frame(right_section)
+        progress_frame.pack(fill=tk.X, pady=5)
+        
+        self.progress_var = tk.StringVar(value="Ready")
+        ttk.Label(progress_frame, textvariable=self.progress_var,
+                 font=('Segoe UI', 9, 'italic')).pack()
+        
+        self.progress_bar = ttk.Progressbar(progress_frame, mode='indeterminate', length=400)
+        self.progress_bar.pack(pady=5)
         
         # ===== TABELLA E DETTAGLI =====
         main_paned = ttk.PanedWindow(self.root, orient=tk.HORIZONTAL)
@@ -441,105 +661,68 @@ class AnalyticaBetGUI:
         left_frame = ttk.LabelFrame(main_paned, text="📋 Match List", padding="5")
         main_paned.add(left_frame, weight=3)
         
-        # Frame per tabella con bordo
+        # Frame per tabella
         table_container = tk.Frame(left_frame, bg=self.COLORS['primary'], 
                                   relief='solid', borderwidth=2)
         table_container.pack(fill=tk.BOTH, expand=True)
         
-        # Scrollbar
-        table_scroll = ttk.Scrollbar(table_container)
-        table_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        # Scrollbar VERTICALE (a destra)
+        table_scroll_y = ttk.Scrollbar(table_container, orient=tk.VERTICAL)
+        table_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        # Scrollbar ORIZZONTALE (in basso)
+        table_scroll_x = ttk.Scrollbar(table_container, orient=tk.HORIZONTAL)
+        table_scroll_x.pack(side=tk.BOTTOM, fill=tk.X)
+        
+        # Treeview
         
         # Treeview
         columns = (
-            # Info base
             'Ora', 'Lega', 'Casa', 'Trasf',
-            
-            # Quote 1X2
             '1', 'X', '2',
-            
-            # Quote Double Chance
             '1X', '12', 'X2',
-            
-            # Quote Over/Under
-            'O1.5', 'O2.5', 'O3.5',
-            
-            # Classifica
+            'U1.5', 'O1.5', 'U2.5', 'O2.5', 'U3.5', 'O3.5',
+            'GG', 'NG',
             'H_Pos', 'A_Pos', 'H_Pts', 'A_Pts',
-            
-            # Gol Totali (Overall)
             'H_GF', 'H_GS', 'A_GF', 'A_GS',
-            
-            # Gol Casa/Trasferta
-            'H_GF_Home', 'A_GF_Away',
-            
-            # Gol Ultimi 5 (Overall)
-            'H_GF_L5', 'H_GS_L5', 'A_GF_L5', 'A_GS_L5',
-            
-            # Gol Ultimi 5 Casa/Trasferta
-            'H_GF_H_L5', 'A_GF_A_L5',
-            
-            # Form
+            'H_GF_Home', 'H_GS_Home', 'A_GF_Away', 'A_GS_Away',
             'Form H', 'Form A'
         )
 
         self.tree = ttk.Treeview(
-            left_frame, 
+            table_container, 
             columns=columns, 
             show='headings', 
-            yscrollcommand=table_scroll.set, 
-            height=20
+            yscrollcommand=table_scroll_y.set,
+            xscrollcommand=table_scroll_x.set,
+            height=25
         )
-        table_scroll.config(command=self.tree.yview)
+        table_scroll_y.config(command=self.tree.yview)
+        table_scroll_x.config(command=self.tree.xview)
 
-        # Larghezze colonne
         widths = [
-            50,   # Ora
-            200,  # Lega (NON troncata più)
-            110,  # Casa
-            110,  # Trasf
-            40,   # 1
-            40,   # X
-            40,   # 2
-            40,   # 1X
-            40,   # 12
-            40,   # X2
-            45,   # O1.5
-            45,   # O2.5
-            45,   # O3.5
-            40,   # H_Pos
-            40,   # A_Pos
-            40,   # H_Pts
-            40,   # A_Pts
-            40,   # H_GF
-            40,   # H_GS
-            40,   # A_GF
-            40,   # A_GS
-            50,   # H_GF_Home
-            50,   # A_GF_Away
-            45,   # H_GF_L5
-            45,   # H_GS_L5
-            45,   # A_GF_L5
-            45,   # A_GS_L5
-            50,   # H_GF_H_L5
-            50,   # A_GF_A_L5
-            60,   # Form H
-            60,   # Form A
+            50, 200, 110, 110,
+            40, 40, 40,
+            40, 40, 40,
+            45, 45, 45, 45, 45, 45,
+            40, 40,
+            40, 40, 40, 40,
+            40, 40, 40, 40,
+            50, 50, 50, 50,
+            60, 60,
         ]
 
         for col, width in zip(columns, widths):
             self.tree.heading(col, text=col)
             
-            # Allineamento: centro per numeri, sinistra per testo
             if col in ['Ora', 'Lega', 'Casa', 'Trasf', 'Form H', 'Form A']:
                 align = tk.W
             else:
                 align = tk.CENTER
             
-            # IMPORTANTE: minwidth più basso per permettere resize, stretch=True
             self.tree.column(col, width=width, minwidth=50, anchor=align, stretch=True)
 
-        self.tree.pack(fill=tk.BOTH, expand=True)
+        self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         self.tree.bind('<<TreeviewSelect>>', self.on_match_select)
         
         # Tag per righe alternate
@@ -551,7 +734,7 @@ class AnalyticaBetGUI:
         main_paned.add(right_frame, weight=2)
         
         self.details_text = scrolledtext.ScrolledText(right_frame, wrap=tk.WORD,
-                                                     width=45, height=28,
+                                                     width=45, height=30,
                                                      font=('Consolas', 9),
                                                      bg=self.COLORS['row_even'],
                                                      fg=self.COLORS['text_dark'],
@@ -573,10 +756,12 @@ class AnalyticaBetGUI:
                   command=self.save_csv, **btn_style).pack(side=tk.LEFT, padx=5)
         ttk.Button(actions_frame, text="📋 Save JSON",
                   command=self.save_json, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="🔍 Filter Leagues",
+        ttk.Button(actions_frame, text="🔎 Filter Leagues",
                   command=self.filter_leagues, **btn_style).pack(side=tk.LEFT, padx=5)
         ttk.Button(actions_frame, text="🗑️ Clear",
                   command=self.clear_results, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="🗂️ Clear Cache",
+                  command=self.clear_cache, **btn_style).pack(side=tk.LEFT, padx=5)
         ttk.Button(actions_frame, text="🔮 Predict All Matches",
           command=self.predict_all_matches, **btn_style).pack(side=tk.LEFT, padx=5)
         
@@ -589,6 +774,30 @@ class AnalyticaBetGUI:
                                bg=self.COLORS['primary'], fg=self.COLORS['text_light'],
                                font=('Segoe UI', 9), anchor=tk.W, padx=10)
         status_label.pack(fill=tk.X)
+
+    def clear_cache(self):
+        """Elimina tutti i file cache"""
+        result = messagebox.askyesno(
+            "Clear Cache",
+            "Delete all cached match data?\n\nThis cannot be undone.",
+            icon='warning'
+        )
+        
+        if result:
+            try:
+                cache_dir = Path("cache")
+                if cache_dir.exists():
+                    count = 0
+                    for file in cache_dir.glob("matches_*.json"):
+                        file.unlink()
+                        count += 1
+                    
+                    self.status_var.set(f"✅ Deleted {count} cache files")
+                    messagebox.showinfo("Success", f"Deleted {count} cache files")
+                else:
+                    messagebox.showinfo("Info", "No cache folder found")
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to clear cache:\n{e}")
 
     def _on_tree_motion(self, event):
         """Gestisce tooltip sugli header delle colonne"""
@@ -749,15 +958,27 @@ class AnalyticaBetGUI:
             else:
                 values.extend(['-', '-', '-'])
             
-            # ===== OVER/UNDER =====
+            # ===== OVER/UNDER (con under) =====
             if match.odds:
                 values.extend([
+                    f"{match.odds.under_1_5:.2f}" if match.odds.under_1_5 > 0 else '-',
                     f"{match.odds.over_1_5:.2f}" if match.odds.over_1_5 > 0 else '-',
+                    f"{match.odds.under_2_5:.2f}" if match.odds.under_2_5 > 0 else '-',
                     f"{match.odds.over_2_5:.2f}" if match.odds.over_2_5 > 0 else '-',
+                    f"{match.odds.under_3_5:.2f}" if match.odds.under_3_5 > 0 else '-',
                     f"{match.odds.over_3_5:.2f}" if match.odds.over_3_5 > 0 else '-'
                 ])
             else:
-                values.extend(['-', '-', '-'])
+                values.extend(['-', '-', '-', '-', '-', '-'])
+            
+            # ===== BTS (GG/NG) =====
+            if match.odds:
+                values.extend([
+                    f"{match.odds.bts_yes:.2f}" if match.odds.bts_yes > 0 else '-',
+                    f"{match.odds.bts_no:.2f}" if match.odds.bts_no > 0 else '-'
+                ])
+            else:
+                values.extend(['-', '-'])
             
             # ===== CLASSIFICA (Posizione + Punti) =====
             if match.home_standing:
@@ -794,57 +1015,20 @@ class AnalyticaBetGUI:
                 values.extend(['-', '-'])
             
             # ===== GOL CASA/TRASFERTA =====
-            # Casa: gol fatti in casa
+            # ===== GOL CASA/TRASFERTA (con gol subiti) =====
+            # Casa: gol fatti E subiti in casa
             if match.home_stats and match.home_stats.home_stats:
                 values.append(str(match.home_stats.home_stats.goals_for) if match.home_stats.home_stats.goals_for > 0 else '-')
+                values.append(str(match.home_stats.home_stats.goals_against) if match.home_stats.home_stats.goals_against > 0 else '-')
             else:
-                values.append('-')
+                values.extend(['-', '-'])
             
-            # Trasferta: gol fatti fuori
+            # Trasferta: gol fatti E subiti fuori
             if match.away_stats and match.away_stats.away_stats:
                 values.append(str(match.away_stats.away_stats.goals_for) if match.away_stats.away_stats.goals_for > 0 else '-')
-            else:
-                values.append('-')
-            
-            # ===== GOL ULTIMI 5 (Overall) =====
-            # Casa
-            if match.home_last_matches and len(match.home_last_matches) >= 5:
-                gf_l5, gs_l5 = self._calculate_goals_last_n(match.home_last_matches[:5], match.home_team)
-                values.append(str(gf_l5))
-                values.append(str(gs_l5))
+                values.append(str(match.away_stats.away_stats.goals_against) if match.away_stats.away_stats.goals_against > 0 else '-')
             else:
                 values.extend(['-', '-'])
-            
-            # Trasferta
-            if match.away_last_matches and len(match.away_last_matches) >= 5:
-                gf_l5, gs_l5 = self._calculate_goals_last_n(match.away_last_matches[:5], match.away_team)
-                values.append(str(gf_l5))
-                values.append(str(gs_l5))
-            else:
-                values.extend(['-', '-'])
-            
-            # ===== GOL ULTIMI 5 CASA/TRASFERTA =====
-            # Casa: ultimi 5 in casa
-            if match.home_last_matches:
-                home_matches_at_home = [m for m in match.home_last_matches if m['home_team'].lower() == match.home_team.lower()][:5]
-                if home_matches_at_home:
-                    gf_h_l5, _ = self._calculate_goals_last_n(home_matches_at_home, match.home_team)
-                    values.append(str(gf_h_l5))
-                else:
-                    values.append('-')
-            else:
-                values.append('-')
-            
-            # Trasferta: ultimi 5 fuori
-            if match.away_last_matches:
-                away_matches_away = [m for m in match.away_last_matches if m['away_team'].lower() == match.away_team.lower()][:5]
-                if away_matches_away:
-                    gf_a_l5, _ = self._calculate_goals_last_n(away_matches_away, match.away_team)
-                    values.append(str(gf_a_l5))
-                else:
-                    values.append('-')
-            else:
-                values.append('-')
             
             # ===== FORM =====
             values.append(match.get_home_form_string(5) or '-')
@@ -855,42 +1039,6 @@ class AnalyticaBetGUI:
         
         self.status_var.set(f"Visualizzate {len(sorted_matches)} partite")
     
-    def _calculate_goals_last_n(self, matches, team_name):
-        """
-        Calcola gol fatti e subiti negli ultimi N match
-        
-        Args:
-            matches: Lista di dict con 'home_team', 'away_team', 'score'
-            team_name: Nome della squadra
-        
-        Returns:
-            tuple: (gol_fatti, gol_subiti)
-        """
-        goals_for = 0
-        goals_against = 0
-        
-        for match in matches:
-            score = match.get('score', '')
-            
-            # Parse score "2 - 1"
-            try:
-                parts = score.split('-')
-                if len(parts) == 2:
-                    home_goals = int(parts[0].strip())
-                    away_goals = int(parts[1].strip())
-                    
-                    # Determina se la squadra era in casa o fuori
-                    if match['home_team'].lower() == team_name.lower():
-                        goals_for += home_goals
-                        goals_against += away_goals
-                    elif match['away_team'].lower() == team_name.lower():
-                        goals_for += away_goals
-                        goals_against += home_goals
-            except:
-                pass
-        
-        return goals_for, goals_against
-
     def _extract_match_values(self, match):
         """Estrae tutti i valori per una partita"""
         values = []
@@ -913,15 +1061,27 @@ class AnalyticaBetGUI:
         else:
             values.extend(['-', '-', '-'])
         
-        # Over/Under
+        # Over/Under (con under)
         if match.odds:
             values.extend([
+                f"{match.odds.under_1_5:.2f}" if match.odds.under_1_5 > 0 else '-',
                 f"{match.odds.over_1_5:.2f}" if match.odds.over_1_5 > 0 else '-',
+                f"{match.odds.under_2_5:.2f}" if match.odds.under_2_5 > 0 else '-',
                 f"{match.odds.over_2_5:.2f}" if match.odds.over_2_5 > 0 else '-',
+                f"{match.odds.under_3_5:.2f}" if match.odds.under_3_5 > 0 else '-',
                 f"{match.odds.over_3_5:.2f}" if match.odds.over_3_5 > 0 else '-'
             ])
         else:
-            values.extend(['-', '-', '-'])
+            values.extend(['-', '-', '-', '-', '-', '-'])
+        
+        # BTS
+        if match.odds:
+            values.extend([
+                f"{match.odds.bts_yes:.2f}" if match.odds.bts_yes > 0 else '-',
+                f"{match.odds.bts_no:.2f}" if match.odds.bts_no > 0 else '-'
+            ])
+        else:
+            values.extend(['-', '-'])
         
         # Classifica
         values.append(str(match.home_standing.position) if match.home_standing and match.home_standing.position > 0 else '-')
@@ -946,50 +1106,18 @@ class AnalyticaBetGUI:
         else:
             values.extend(['-', '-'])
         
-        # Gol casa/trasferta
+        # Gol casa/trasferta (con gol subiti)
         if match.home_stats and match.home_stats.home_stats:
             values.append(str(match.home_stats.home_stats.goals_for) if match.home_stats.home_stats.goals_for > 0 else '-')
+            values.append(str(match.home_stats.home_stats.goals_against) if match.home_stats.home_stats.goals_against > 0 else '-')
         else:
-            values.append('-')
+            values.extend(['-', '-'])
         
         if match.away_stats and match.away_stats.away_stats:
             values.append(str(match.away_stats.away_stats.goals_for) if match.away_stats.away_stats.goals_for > 0 else '-')
-        else:
-            values.append('-')
-        
-        # Gol ultimi 5 overall
-        if match.home_last_matches and len(match.home_last_matches) >= 5:
-            gf, gs = self._calculate_goals_last_n(match.home_last_matches[:5], match.home_team)
-            values.extend([str(gf), str(gs)])
+            values.append(str(match.away_stats.away_stats.goals_against) if match.away_stats.away_stats.goals_against > 0 else '-')
         else:
             values.extend(['-', '-'])
-        
-        if match.away_last_matches and len(match.away_last_matches) >= 5:
-            gf, gs = self._calculate_goals_last_n(match.away_last_matches[:5], match.away_team)
-            values.extend([str(gf), str(gs)])
-        else:
-            values.extend(['-', '-'])
-        
-        # Gol ultimi 5 casa/trasferta
-        if match.home_last_matches:
-            home_at_home = [m for m in match.home_last_matches if m['home_team'].lower() == match.home_team.lower()][:5]
-            if home_at_home:
-                gf, _ = self._calculate_goals_last_n(home_at_home, match.home_team)
-                values.append(str(gf))
-            else:
-                values.append('-')
-        else:
-            values.append('-')
-        
-        if match.away_last_matches:
-            away_away = [m for m in match.away_last_matches if m['away_team'].lower() == match.away_team.lower()][:5]
-            if away_away:
-                gf, _ = self._calculate_goals_last_n(away_away, match.away_team)
-                values.append(str(gf))
-            else:
-                values.append('-')
-        else:
-            values.append('-')
         
         # Form
         values.append(match.get_home_form_string(5) or '-')
@@ -1025,7 +1153,11 @@ class AnalyticaBetGUI:
             messagebox.showwarning("Warning", "Scraping already in progress!")
             return
         
-        date_str = self.date_var.get().strip()
+        # Leggi data dal calendario o da entry
+        if hasattr(self, 'calendar'):
+            date_str = self.calendar.get_date()
+        else:
+            date_str = self.date_var.get().strip()
         target_date = None
         
         for fmt in ['%Y-%m-%d', '%d-%m-%Y', '%d/%m/%Y']:
@@ -1085,6 +1217,18 @@ class AnalyticaBetGUI:
         self.progress_bar.stop()
         
         self.matches = matches
+
+        # === SALVA IN CACHE ===
+        if hasattr(self, 'calendar'):
+            date_str = self.calendar.get_date()
+        else:
+            date_str = self.date_var.get().strip()
+        
+        try:
+            target_date = datetime.strptime(date_str, '%Y-%m-%d')
+            self.save_matches_to_cache(matches, target_date)
+        except Exception as e:
+            logger.error(f"Errore salvataggio cache: {e}")
         
         if not matches:
             self.progress_var.set("No matches found")
@@ -1105,12 +1249,6 @@ class AnalyticaBetGUI:
         self.stats_labels['leagues'].config(text=str(stats['unique_leagues']))
         self.stats_labels['with_odds'].config(text=str(stats['matches_with_odds']))
         self.stats_labels['with_stats'].config(text=str(stats.get('matches_with_stats', 0)))
-        self.stats_labels['with_standing'].config(text=str(stats.get('matches_with_standing', 0)))
-        
-        self.progress_var.set(f"✓ Completed: {len(matches)} matches")
-        self.status_var.set(f"Loaded {len(matches)} matches - {stats['unique_leagues']} leagues")
-        
-        messagebox.showinfo("Success", f"✓ Downloaded {len(matches)} matches!\n\nLeagues: {stats['unique_leagues']}\nWith details: {stats.get('matches_with_stats', 0)}")
     
     def on_scraping_error(self, error_msg):
         """Callback errore"""
@@ -1513,12 +1651,13 @@ class AnalyticaBetGUI:
                 if m.odds and m.odds.home_win > 0
             ]
         
-        # Filtro: senza statistiche
+        # Filtro: senza statistiche (controlla solo posizione + gol casa)
         if self.filter_no_stats_var.get():
             filtered_matches = [
                 m for m in filtered_matches 
-                if m.home_stats and m.away_stats and 
-                   (m.home_stats.wins > 0 or m.away_stats.wins > 0)
+                if (m.home_standing and m.home_standing.position > 0 and
+                    m.home_stats and m.home_stats.home_stats and 
+                    m.home_stats.home_stats.goals_for > 0)
             ]
         
         # Popola tabella con partite filtrate
