@@ -6,7 +6,7 @@ Interfaccia grafica professionale con salvataggio layout
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog, scrolledtext
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import List, Optional, Dict
 import asyncio
 import threading
 from pathlib import Path
@@ -21,6 +21,7 @@ from src.utils.config import Config
 from src.utils.logger import setup_logger
 from src.analysis.prediction_engine import PredictionEngine, MatchPrediction
 from src.analysis.league_analyzer import LeagueAnalyzer, LeagueStats
+from src.analysis.backtesting_manager import BacktestingManager
 
 logger = setup_logger(__name__)
 
@@ -116,7 +117,7 @@ class AnalyticaBetGUI:
     
     def __init__(self, root):
         self.root = root
-        self.root.title("⚽ Analytica Bet - Professional Betting Analysis")
+        self.root.title("⚽ Analytica Bet - Analisi partite")
         
         self.config = Config()
         self.matches = []
@@ -124,6 +125,8 @@ class AnalyticaBetGUI:
         self.selected_match = None
         self.league_analyzer = LeagueAnalyzer()
         self.prediction_engine = PredictionEngine(league_analyzer=self.league_analyzer)
+        self.backtesting_manager = BacktestingManager()
+        self.current_predictions = {}  # Cache predictions correnti {match_url: prediction}
         self.current_prediction = None
         
         # Carica impostazioni salvate
@@ -343,6 +346,14 @@ class AnalyticaBetGUI:
             for col in self.tree['columns']:
                 column_widths[col] = self.tree.column(col, 'width')
             self.settings['column_widths'] = column_widths
+
+            # Salva larghezza pannello details (PanedWindow sash position)
+            if hasattr(self, 'main_paned'):
+                try:
+                    sash_pos = self.main_paned.sashpos(0)
+                    self.settings['details_sash_position'] = sash_pos
+                except:
+                    pass
             
             # Salva stato filtri
             self.settings['filters'] = {
@@ -596,24 +607,114 @@ class AnalyticaBetGUI:
             value_label.grid(row=row, column=col+1, sticky=tk.W, padx=5, pady=3)
             self.stats_labels[key] = value_label
         
-        # --- DESTRA: Controlli ---
-        right_section = ttk.LabelFrame(top_panel, text="⚙️ Controls", padding="10")
-        right_section.pack(side=tk.LEFT, padx=5, fill=tk.BOTH, expand=True)
+        # --- DESTRA: Controlli (con scroll) ---
+        right_section_container = ttk.LabelFrame(top_panel, text="⚙️ Controls", padding="5")
+        right_section_container.pack(side=tk.LEFT, padx=5, fill=tk.BOTH, expand=True)
+
+        # Canvas con scrollbar
+        controls_canvas = tk.Canvas(right_section_container, bg=self.COLORS['bg_light'], 
+                                highlightthickness=0, height=400)
+        controls_scrollbar = ttk.Scrollbar(right_section_container, orient="vertical", 
+                                        command=controls_canvas.yview)
+        right_section = ttk.Frame(controls_canvas)
+
+        right_section.bind(
+            "<Configure>",
+            lambda e: controls_canvas.configure(scrollregion=controls_canvas.bbox("all"))
+        )
+
+        controls_canvas.create_window((0, 0), window=right_section, anchor="nw")
+        controls_canvas.configure(yscrollcommand=controls_scrollbar.set)
+
+        controls_canvas.pack(side="left", fill="both", expand=True)
+        controls_scrollbar.pack(side="right", fill="y")
+
+        # === LEGENDA ===
+        ttk.Separator(right_section, orient='horizontal').pack(fill=tk.X, pady=10)
+
+        ttk.Label(right_section, text="📖 Legend:", 
+                style='Header.TLabel').pack(anchor=tk.W, pady=(5,2))
+
+        legend_frame = ttk.Frame(right_section)
+        legend_frame.pack(fill=tk.X, pady=5)
+
+        # Crea frame con background colorato per ogni voce
+        icon_frame = tk.Frame(legend_frame, bg=self.COLORS['bg_light'])
+        icon_frame.pack(fill=tk.X, pady=2)
+
+        tk.Label(icon_frame, text="🎯 ICONS:", font=('Segoe UI', 9, 'bold'),
+                bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(anchor=tk.W)
+
+        icons = [
+            ("💎", "Value bet found"),
+            ("⭐", "High confidence (≥75)"),
+            ("📊", "Medium confidence (60-75)"),
+            ("⚠️", "Low confidence (<40)")
+        ]
+
+        for icon, desc in icons:
+            row = tk.Frame(icon_frame, bg=self.COLORS['bg_light'])
+            row.pack(fill=tk.X, pady=1)
+            tk.Label(row, text=f"  {icon}", font=('Segoe UI', 9), width=3,
+                    bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(side=tk.LEFT)
+            tk.Label(row, text=desc, font=('Segoe UI', 8),
+                    bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(side=tk.LEFT)
+
+        # Confidence con colori
+        conf_frame = tk.Frame(legend_frame, bg=self.COLORS['bg_light'])
+        conf_frame.pack(fill=tk.X, pady=5)
+
+        tk.Label(conf_frame, text="📊 CONFIDENCE:", font=('Segoe UI', 9, 'bold'),
+                bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(anchor=tk.W)
+
+        confidences = [
+            ("🟢", "75-100 = Very High"),
+            ("🟡", "60-74 = High"),
+            ("🟠", "40-59 = Medium"),
+            ("🔴", "<40 = Low / Skip")
+        ]
+
+        for icon, desc in confidences:
+            row = tk.Frame(conf_frame, bg=self.COLORS['bg_light'])
+            row.pack(fill=tk.X, pady=1)
+            tk.Label(row, text=f"  {icon}", font=('Segoe UI', 9), width=3,
+                    bg=self.COLORS['bg_light']).pack(side=tk.LEFT)
+            tk.Label(row, text=desc, font=('Segoe UI', 8),
+                    bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(side=tk.LEFT)
+
+        # Row colors con esempi colorati
+        colors_frame = tk.Frame(legend_frame, bg=self.COLORS['bg_light'])
+        colors_frame.pack(fill=tk.X, pady=5)
+
+        tk.Label(colors_frame, text="🎨 ROW COLORS:", font=('Segoe UI', 9, 'bold'),
+                bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(anchor=tk.W)
+
+        row_colors = [
+            ("Green", "Recommended", '#E8F5E9'),
+            ("Yellow", "Interesting", '#FFF9C4'),
+            ("Pink", "Skip", '#FFEBEE'),
+            ("White", "Neutral", '#FFFFFF')
+        ]
+
+        for color_name, desc, bg_color in row_colors:
+            row = tk.Frame(colors_frame, bg=self.COLORS['bg_light'])
+            row.pack(fill=tk.X, pady=1)
+            
+            # Box colorato
+            color_box = tk.Label(row, text="   ", bg=bg_color, relief='solid', borderwidth=1, width=3)
+            color_box.pack(side=tk.LEFT, padx=2)
+            
+            tk.Label(row, text=f"{color_name} = {desc}", font=('Segoe UI', 8),
+                    bg=self.COLORS['bg_light'], fg=self.COLORS['text_dark']).pack(side=tk.LEFT)
+       
         
-        # Download details
-        self.download_details_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(
-            right_section,
-            text="📊 Download complete details (odds, stats, standings)",
-            variable=self.download_details_var
-        ).pack(anchor=tk.W, pady=5)
-        
+       
         # Filtri
         ttk.Label(right_section, text="🔍 Smart Filters:", 
                  style='Header.TLabel').pack(anchor=tk.W, pady=(10, 5))
         
-        self.filter_no_odds_var = tk.BooleanVar(value=False)
-        self.filter_no_stats_var = tk.BooleanVar(value=False)
+        self.filter_no_odds_var = tk.BooleanVar(value=True)  # Default TRUE
+        self.filter_no_stats_var = tk.BooleanVar(value=True)  # Default TRUE
         
         ttk.Checkbutton(
             right_section,
@@ -654,8 +755,9 @@ class AnalyticaBetGUI:
         self.progress_bar.pack(pady=5)
         
         # ===== TABELLA E DETTAGLI =====
-        main_paned = ttk.PanedWindow(self.root, orient=tk.HORIZONTAL)
-        main_paned.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        self.main_paned = ttk.PanedWindow(self.root, orient=tk.HORIZONTAL)
+        self.main_paned.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        main_paned = self.main_paned  # Alias per compatibilità
         
         # Pannello sinistro: Tabella
         left_frame = ttk.LabelFrame(main_paned, text="📋 Match List", padding="5")
@@ -678,7 +780,9 @@ class AnalyticaBetGUI:
         
         # Treeview
         columns = (
+            '🎯',  # Icona prediction
             'Ora', 'Lega', 'Casa', 'Trasf',
+            '⚽ Ris',  # NUOVA COLONNA RISULTATO
             '1', 'X', '2',
             '1X', '12', 'X2',
             'U1.5', 'O1.5', 'U2.5', 'O2.5', 'U3.5', 'O3.5',
@@ -686,7 +790,8 @@ class AnalyticaBetGUI:
             'H_Pos', 'A_Pos', 'H_Pts', 'A_Pts',
             'H_GF', 'H_GS', 'A_GF', 'A_GS',
             'H_GF_Home', 'H_GS_Home', 'A_GF_Away', 'A_GS_Away',
-            'Form H', 'Form A'
+            'Form H', 'Form A',
+            '🎯 Bet #1', '📊 Conf #1', '🎯 Bet #2', '📊 Conf #2'  # MODIFICATO
         )
 
         self.tree = ttk.Treeview(
@@ -701,7 +806,9 @@ class AnalyticaBetGUI:
         table_scroll_x.config(command=self.tree.xview)
 
         widths = [
+            30,  # 🎯 icona
             50, 200, 110, 110,
+            60,  # Risultato
             40, 40, 40,
             40, 40, 40,
             45, 45, 45, 45, 45, 45,
@@ -710,6 +817,7 @@ class AnalyticaBetGUI:
             40, 40, 40, 40,
             50, 50, 50, 50,
             60, 60,
+            100, 50, 100, 50  # Bet #1, Conf #1, Bet #2, Conf #2
         ]
 
         for col, width in zip(columns, widths):
@@ -724,6 +832,31 @@ class AnalyticaBetGUI:
 
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         self.tree.bind('<<TreeviewSelect>>', self.on_match_select)
+
+         # ===== BOTTONI AZIONI =====
+        actions_frame = ttk.Frame(self.root, padding="10")
+        actions_frame.pack(fill=tk.X)
+        
+        btn_style = {'width': 18, 'style': 'Action.TButton'}
+        
+        ttk.Button(actions_frame, text="💾 Save Excel", 
+                  command=self.save_excel, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="📊 Save CSV",
+                  command=self.save_csv, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="📋 Save JSON",
+                  command=self.save_json, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="🔎 Filter Leagues",
+                  command=self.filter_leagues, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="🗑️ Clear",
+                  command=self.clear_results, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="🗂️ Clear Cache",
+                  command=self.clear_cache, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="🔮 Predict All Matches",
+          command=self.predict_all_matches, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="📦 Archive Predictions",
+          command=self.archive_predictions, **btn_style).pack(side=tk.LEFT, padx=5)
+        ttk.Button(actions_frame, text="🔬 Backtesting",
+                command=self.open_backtesting_window, **btn_style).pack(side=tk.LEFT, padx=5)
         
         # Tag per righe alternate
         self.tree.tag_configure('evenrow', background=self.COLORS['row_even'])
@@ -744,26 +877,7 @@ class AnalyticaBetGUI:
         self.details_text.insert('1.0', 'Select a match to view details...')
         self.details_text.config(state='disabled')
         
-        # ===== BOTTONI AZIONI =====
-        actions_frame = ttk.Frame(self.root, padding="10")
-        actions_frame.pack(fill=tk.X)
-        
-        btn_style = {'width': 18, 'style': 'Action.TButton'}
-        
-        ttk.Button(actions_frame, text="💾 Save Excel", 
-                  command=self.save_excel, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="📊 Save CSV",
-                  command=self.save_csv, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="📋 Save JSON",
-                  command=self.save_json, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="🔎 Filter Leagues",
-                  command=self.filter_leagues, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="🗑️ Clear",
-                  command=self.clear_results, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="🗂️ Clear Cache",
-                  command=self.clear_cache, **btn_style).pack(side=tk.LEFT, padx=5)
-        ttk.Button(actions_frame, text="🔮 Predict All Matches",
-          command=self.predict_all_matches, **btn_style).pack(side=tk.LEFT, padx=5)
+       
         
         # ===== STATUS BAR =====
         status_frame = tk.Frame(self.root, bg=self.COLORS['primary'], height=30)
@@ -918,10 +1032,13 @@ class AnalyticaBetGUI:
             self.status_var.set("Error generating predictions")
     
     def populate_table(self, matches):
-        """Popola tabella con TUTTI i dati richiesti"""
+        """Popola tabella con predictions incluse"""
         # Pulisci tabella
         for item in self.tree.get_children():
             self.tree.delete(item)
+        
+        # Pulisci cache predictions
+        self.current_predictions = {}
         
         # Ordina per orario
         sorted_matches = sorted(matches, key=lambda m: m.time)
@@ -929,14 +1046,43 @@ class AnalyticaBetGUI:
         for match in sorted_matches:
             values = []
             
+            # === GENERA PREDICTION ===
+            try:
+                pred = self.prediction_engine.predict_match(match, self.matches)
+                self.current_predictions[match.url] = pred  # Salva in cache
+            except Exception as e:
+                logger.error(f"Errore predizione {match.home_team} vs {match.away_team}: {e}")
+                pred = None
+            
+            # === ICONA PREDICTION ===
+            if pred:
+                if pred.value_bets and pred.confidence_score >= 70:
+                    icon = '💎'
+                elif pred.confidence_score >= 75:
+                    icon = '⭐'
+                elif pred.confidence_score >= 60:
+                    icon = '📊'
+                elif pred.confidence_score < 40:
+                    icon = '⚠️'
+                else:
+                    icon = ''
+            else:
+                icon = ''
+            
+            values.append(icon)
+            
             # ===== INFO BASE =====
             values.append(match.time.strftime('%H:%M'))
-            
-            # LEGA - NOME COMPLETO senza troncamento
             values.append(match.league)
-            
             values.append(match.home_team)
             values.append(match.away_team)
+
+            # ===== RISULTATO (NUOVA COLONNA) =====
+            if match.result:
+                result_str = match.result.get('score', '-')
+                values.append(result_str)
+            else:
+                values.append('-')
             
             # ===== QUOTE 1X2 =====
             if match.odds and match.odds.home_win > 0:
@@ -958,7 +1104,7 @@ class AnalyticaBetGUI:
             else:
                 values.extend(['-', '-', '-'])
             
-            # ===== OVER/UNDER (con under) =====
+            # ===== OVER/UNDER =====
             if match.odds:
                 values.extend([
                     f"{match.odds.under_1_5:.2f}" if match.odds.under_1_5 > 0 else '-',
@@ -971,7 +1117,7 @@ class AnalyticaBetGUI:
             else:
                 values.extend(['-', '-', '-', '-', '-', '-'])
             
-            # ===== BTS (GG/NG) =====
+            # ===== BTS =====
             if match.odds:
                 values.extend([
                     f"{match.odds.bts_yes:.2f}" if match.odds.bts_yes > 0 else '-',
@@ -980,28 +1126,13 @@ class AnalyticaBetGUI:
             else:
                 values.extend(['-', '-'])
             
-            # ===== CLASSIFICA (Posizione + Punti) =====
-            if match.home_standing:
-                values.append(str(match.home_standing.position) if match.home_standing.position > 0 else '-')
-            else:
-                values.append('-')
+            # ===== CLASSIFICA =====
+            values.append(str(match.home_standing.position) if match.home_standing and match.home_standing.position > 0 else '-')
+            values.append(str(match.away_standing.position) if match.away_standing and match.away_standing.position > 0 else '-')
+            values.append(str(match.home_standing.points) if match.home_standing and match.home_standing.points > 0 else '-')
+            values.append(str(match.away_standing.points) if match.away_standing and match.away_standing.points > 0 else '-')
             
-            if match.away_standing:
-                values.append(str(match.away_standing.position) if match.away_standing.position > 0 else '-')
-            else:
-                values.append('-')
-            
-            if match.home_standing and match.home_standing.points > 0:
-                values.append(str(match.home_standing.points))
-            else:
-                values.append('-')
-            
-            if match.away_standing and match.away_standing.points > 0:
-                values.append(str(match.away_standing.points))
-            else:
-                values.append('-')
-            
-            # ===== GOL TOTALI (Overall) =====
+            # ===== GOL TOTALI =====
             if match.home_stats:
                 values.append(str(match.home_stats.goals_for) if match.home_stats.goals_for > 0 else '-')
                 values.append(str(match.home_stats.goals_against) if match.home_stats.goals_against > 0 else '-')
@@ -1015,15 +1146,12 @@ class AnalyticaBetGUI:
                 values.extend(['-', '-'])
             
             # ===== GOL CASA/TRASFERTA =====
-            # ===== GOL CASA/TRASFERTA (con gol subiti) =====
-            # Casa: gol fatti E subiti in casa
             if match.home_stats and match.home_stats.home_stats:
                 values.append(str(match.home_stats.home_stats.goals_for) if match.home_stats.home_stats.goals_for > 0 else '-')
                 values.append(str(match.home_stats.home_stats.goals_against) if match.home_stats.home_stats.goals_against > 0 else '-')
             else:
                 values.extend(['-', '-'])
             
-            # Trasferta: gol fatti E subiti fuori
             if match.away_stats and match.away_stats.away_stats:
                 values.append(str(match.away_stats.away_stats.goals_for) if match.away_stats.away_stats.goals_for > 0 else '-')
                 values.append(str(match.away_stats.away_stats.goals_against) if match.away_stats.away_stats.goals_against > 0 else '-')
@@ -1034,10 +1162,74 @@ class AnalyticaBetGUI:
             values.append(match.get_home_form_string(5) or '-')
             values.append(match.get_away_form_string(5) or '-')
             
+            # ===== TOP 2 BETS CON CONFIDENCE (NUOVE COLONNE) =====
+            if pred and pred.value_bets:
+                # Bet #1
+                vb1 = pred.value_bets[0]
+                bet1_str = f"{vb1['market']} @{vb1['bookmaker_odds']:.2f}"
+                conf1_str = f"{vb1['prediction_confidence']:.0f} {self._get_confidence_icon(vb1['prediction_confidence'])}"
+                values.append(bet1_str)
+                values.append(conf1_str)
+                
+                # Bet #2 (se esiste)
+                if len(pred.value_bets) > 1:
+                    vb2 = pred.value_bets[1]
+                    bet2_str = f"{vb2['market']} @{vb2['bookmaker_odds']:.2f}"
+                    conf2_str = f"{vb2['prediction_confidence']:.0f} {self._get_confidence_icon(vb2['prediction_confidence'])}"
+                    values.append(bet2_str)
+                    values.append(conf2_str)
+                else:
+                    values.extend(['-', '-'])
+            elif pred:
+                # Nessun value bet, mostra solo predizione principale
+                outcomes = [
+                    (pred.home_win_prob, '1', match.odds.home_win if match.odds else 0),
+                    (pred.draw_prob, 'X', match.odds.draw if match.odds else 0),
+                    (pred.away_win_prob, '2', match.odds.away_win if match.odds else 0)
+                ]
+                sorted_outcomes = sorted(outcomes, key=lambda x: x[0], reverse=True)
+                
+                top = sorted_outcomes[0]
+                bet_str = f"Pred: {top[1]} @{top[2]:.2f}" if top[2] > 0 else f"Pred: {top[1]}"
+                conf_str = f"{pred.confidence_score:.0f} {self._get_confidence_icon(pred.confidence_score)}"
+                
+                values.extend([bet_str, conf_str, '-', '-'])
+            else:
+                values.extend(['-', '-', '-', '-'])
+            
+            # Determina colore riga
+            if pred:
+                if pred.confidence_score >= 70 and pred.value_bets:
+                    tag = 'strong_rec'
+                elif pred.confidence_score >= 60:
+                    tag = 'medium_rec'
+                elif pred.confidence_score < 40 or pred.prediction_variance > 0.7:
+                    tag = 'skip'
+                else:
+                    tag = 'evenrow' if len(self.tree.get_children()) % 2 == 0 else 'oddrow'
+            else:
+                tag = 'evenrow' if len(self.tree.get_children()) % 2 == 0 else 'oddrow'
+            
             # Inserisci nella tabella
-            self.tree.insert('', tk.END, values=values, tags=(match.url,))
+            self.tree.insert('', tk.END, values=values, tags=(match.url, tag))
         
-        self.status_var.set(f"Visualizzate {len(sorted_matches)} partite")
+        # Configura tag colori
+        self.tree.tag_configure('strong_rec', background='#E8F5E9')  # Verde
+        self.tree.tag_configure('medium_rec', background='#FFF9C4')  # Giallo
+        self.tree.tag_configure('skip', background='#FFEBEE')  # Rosa
+        
+        self.status_var.set(f"Visualizzate {len(sorted_matches)} partite con predictions")
+
+    def _get_confidence_icon(self, score: float) -> str:
+        """Ritorna icona colorata per confidence"""
+        if score >= 75:
+            return '🟢'
+        elif score >= 60:
+            return '🟡'
+        elif score >= 40:
+            return '🟠'
+        else:
+            return '🔴'
     
     def _extract_match_values(self, match):
         """Estrae tutti i valori per una partita"""
@@ -1203,12 +1395,10 @@ class AnalyticaBetGUI:
         if not matches:
             return []
         
-        if self.download_details_var.get():
-            self.root.after(0, lambda: self.progress_var.set(f"📊 Downloading details for {len(matches)} matches..."))
-            detailed = await scraper.get_matches_details(matches)
-            return detailed
-        
-        return matches
+        # Scarica sempre i dettagli
+        self.root.after(0, lambda: self.progress_var.set(f"📊 Downloading details for {len(matches)} matches..."))
+        detailed = await scraper.get_matches_details(matches)
+        return detailed
     
     def on_scraping_complete(self, matches):
         """Callback completamento"""
@@ -1338,7 +1528,7 @@ class AnalyticaBetGUI:
                 text += "Pos  Team                          Pts  P   W  D  L   GF  GA  GD\n"
                 text += "─" * 70 + "\n"
                 
-                for team in match.league_standings[:20]:
+                for team in match.league_standings:  # <-- RIMUOVI [:20], mostra TUTTE
                     marker = "  "
                     if (team['team'].lower() in match.home_team.lower() or 
                         match.home_team.lower() in team['team'].lower() or
@@ -1375,11 +1565,14 @@ class AnalyticaBetGUI:
                     text += f"  (League avg: {match.league_statistics['avg_goals']:.2f})\n"
                 text += "\n"
                 
-                # Elo Ratings
-                text += "📊 ELO RATINGS:\n"
-                text += f"  {match.home_team}: {pred.elo_home:.0f}\n"
-                text += f"  {match.away_team}: {pred.elo_away:.0f}\n"
-                text += f"  Difference: {pred.elo_diff:+.0f}\n\n"
+                # Attack/Defense Ratings
+                text += "📊 ATTACK/DEFENSE RATINGS:\n"
+                text += f"  {match.home_team}:\n"
+                text += f"    Attack:  {pred.home_attack_rating:.2f} ({'above' if pred.home_attack_rating > 1 else 'below'} average)\n"
+                text += f"    Defense: {pred.home_defense_rating:.2f} ({'weak' if pred.home_defense_rating > 1 else 'strong'})\n"
+                text += f"  {match.away_team}:\n"
+                text += f"    Attack:  {pred.away_attack_rating:.2f} ({'above' if pred.away_attack_rating > 1 else 'below'} average)\n"
+                text += f"    Defense: {pred.away_defense_rating:.2f} ({'weak' if pred.away_defense_rating > 1 else 'strong'})\n\n"
                 
                 # 1X2
                 text += "🎯 MATCH OUTCOME:\n"
@@ -1701,6 +1894,1021 @@ class AnalyticaBetGUI:
             self.progress_var.set("Ready")
             self.status_var.set("Results cleared - Ready")
 
+
+    def archive_predictions(self):
+        """Salva predictions correnti in archivio CON risultati automatici"""
+        
+        if not self.matches or not self.current_predictions:
+            messagebox.showwarning("Warning", "No predictions to archive!\n\nLoad matches first.")
+            return
+        
+        # Data
+        if hasattr(self, 'calendar'):
+            date_str = self.calendar.get_date()
+        else:
+            date_str = self.date_var.get().strip()
+        
+        try:
+            target_date = datetime.strptime(date_str, '%Y-%m-%d')
+        except:
+            messagebox.showerror("Error", "Invalid date format!")
+            return
+        
+        # Verifica se è una data passata
+        if target_date.date() >= datetime.now().date():
+            messagebox.showwarning(
+                "Future Date",
+                "Cannot archive predictions for future/today matches!\n\n"
+                "Archive is only for past matches with known results."
+            )
+            return
+        
+        # Chiedi conferma
+        result = messagebox.askyesno(
+            "Archive Predictions",
+            f"Archive {len(self.matches)} predictions for {date_str}?\n\n"
+            "The system will try to fetch actual results automatically.",
+            icon='question'
+        )
+        
+        if not result:
+            return
+        
+        self.status_var.set("📥 Fetching actual results...")
+        self.root.update()
+        
+        try:
+            # Scarica risultati reali
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+            from src.scraper.match_scraper import MatchScraper
+            scraper = MatchScraper(self.config)
+            
+            async def fetch_results():
+                async with scraper:
+                    return await scraper.get_match_results(target_date)
+            
+            results = loop.run_until_complete(fetch_results())
+            loop.close()
+            
+            logger.info(f"Trovati {len(results)} risultati reali")
+            
+            # Prepara dati con risultati
+            predictions_data = []
+            matches_with_results = 0
+            
+            for match in self.matches:
+                pred = self.current_predictions.get(match.url)
+                
+                # Cerca risultato reale
+                actual_result = results.get(match.url)
+                
+                if actual_result:
+                    matches_with_results += 1
+                    # Salva anche nel match object
+                    match.result = actual_result
+                
+                pred_dict = match.to_backtesting_dict(prediction=pred, actual_result=actual_result)
+                predictions_data.append(pred_dict)
+        
+            # Aggiorna tabella con risultati
+            self.populate_table(self.matches)
+            
+            # Salva
+            filepath = self.backtesting_manager.save_predictions(target_date, predictions_data)
+            
+            self.status_var.set(f"✅ Archived {len(predictions_data)} predictions ({matches_with_results} with results)")
+            
+            messagebox.showinfo(
+                "Success",
+                f"Predictions archived!\n\n"
+                f"File: {filepath}\n"
+                f"Total matches: {len(predictions_data)}\n"
+                f"With results: {matches_with_results}\n"
+                f"Missing results: {len(predictions_data) - matches_with_results}\n\n"
+                f"{'✅ Ready for backtesting!' if matches_with_results > 0 else '⚠️ No results found - check if matches are finished'}"
+            )
+        
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to archive:\n\n{str(e)}")
+            logger.error(f"Archive error: {e}", exc_info=True)
+
+    def open_backtesting_window(self):
+        """Apre finestra backtesting analysis"""
+        
+        # Verifica se ci sono dati archiviati
+        available_dates = self.backtesting_manager.get_available_dates()
+        
+        if not available_dates:
+            messagebox.showinfo(
+                "No Archived Data",
+                "No archived predictions found!\n\n"
+                "First:\n"
+                "1. Load matches for a past date\n"
+                "2. Click 'Archive Predictions'\n"
+                "3. Add actual results to JSON\n"
+                "4. Then run backtesting"
+            )
+            return
+        
+        # Crea finestra
+        BacktestingWindow(self.root, self.backtesting_manager, available_dates)
+
+
+class BacktestingWindow:
+    """Finestra avanzata per backtesting con filtri real-time"""
+    
+    COLORS = {
+        'primary': '#2C3E50',
+        'secondary': '#3498DB',
+        'success': '#27AE60',
+        'warning': '#F39C12',
+        'danger': '#E74C3C',
+        'bg_light': '#ECF0F1',
+        'text_dark': '#2C3E50',
+    }
+    
+    def __init__(self, parent, backtesting_manager, available_dates: List[str]):
+        self.parent = parent
+        self.manager = backtesting_manager
+        self.available_dates = available_dates
+        
+        # Window
+        self.window = tk.Toplevel(parent)
+        self.window.title("🔬 Advanced Backtesting Analysis")
+        self.window.geometry("1200x800")
+        self.window.configure(bg=self.COLORS['bg_light'])
+        
+        # Filters state
+        self.filters = {
+            'min_confidence': 0,
+            'max_confidence': 100,
+            'home_odds_min': 1.1,
+            'home_odds_max': 10.0,
+            'draw_odds_min': 1.1,
+            'draw_odds_max': 10.0,
+            'away_odds_min': 1.1,
+            'away_odds_max': 10.0,
+            'max_variance': 1.0,
+            'min_edge': 0,
+            'value_only': False,
+            'leagues': [],
+            'stake_per_bet': 10,
+            'use_kelly': False
+        }
+        
+        # Results cache
+        self.current_results = None
+        self.all_predictions = []
+        
+        # Create UI
+        self.create_widgets()
+        
+        # Parse available dates
+        self.setup_date_range()
+        
+        # Initial load
+        self.load_and_analyze()
+    
+    def create_widgets(self):
+        """Crea interfaccia completa"""
+        
+        # Main container con scroll
+        main_canvas = tk.Canvas(self.window, bg=self.COLORS['bg_light'], highlightthickness=0)
+        scrollbar = ttk.Scrollbar(self.window, orient="vertical", command=main_canvas.yview)
+        scrollable_frame = ttk.Frame(main_canvas)
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: main_canvas.configure(scrollregion=main_canvas.bbox("all"))
+        )
+        
+        main_canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        main_canvas.configure(yscrollcommand=scrollbar.set)
+        
+        main_canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        # ===== HEADER =====
+        header_frame = ttk.Frame(scrollable_frame, padding="15")
+        header_frame.pack(fill=tk.X)
+        
+        ttk.Label(header_frame, text="🔬 BACKTESTING ANALYSIS", 
+                 font=('Segoe UI', 16, 'bold'),
+                 foreground=self.COLORS['primary']).pack()
+        
+        ttk.Separator(scrollable_frame, orient='horizontal').pack(fill=tk.X, padx=10, pady=5)
+        
+        # ===== DATE RANGE =====
+        date_frame = ttk.LabelFrame(scrollable_frame, text="📅 Date Range", padding="10")
+        date_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        date_controls = ttk.Frame(date_frame)
+        date_controls.pack()
+        
+        ttk.Label(date_controls, text="From:").grid(row=0, column=0, padx=5)
+        self.start_date_var = tk.StringVar()
+        self.start_date_combo = ttk.Combobox(date_controls, textvariable=self.start_date_var, 
+                                             width=12, state='readonly')
+        self.start_date_combo.grid(row=0, column=1, padx=5)
+        
+        ttk.Label(date_controls, text="To:").grid(row=0, column=2, padx=5)
+        self.end_date_var = tk.StringVar()
+        self.end_date_combo = ttk.Combobox(date_controls, textvariable=self.end_date_var,
+                                           width=12, state='readonly')
+        self.end_date_combo.grid(row=0, column=3, padx=5)
+        
+        ttk.Button(date_controls, text="🔄 Update", 
+                  command=self.load_and_analyze).grid(row=0, column=4, padx=10)
+        
+        # Quick filters
+        quick_frame = ttk.Frame(date_frame)
+        quick_frame.pack(pady=5)
+        
+        ttk.Button(quick_frame, text="Today", command=lambda: self.set_quick_range(0)).pack(side=tk.LEFT, padx=2)
+        ttk.Button(quick_frame, text="Last 7 days", command=lambda: self.set_quick_range(7)).pack(side=tk.LEFT, padx=2)
+        ttk.Button(quick_frame, text="Last 30 days", command=lambda: self.set_quick_range(30)).pack(side=tk.LEFT, padx=2)
+        ttk.Button(quick_frame, text="All", command=self.set_all_dates).pack(side=tk.LEFT, padx=2)
+        
+        # ===== FILTERS =====
+        filters_frame = ttk.LabelFrame(scrollable_frame, text="🎚️ Filters (Real-time)", padding="10")
+        filters_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        # Confidence
+        conf_frame = ttk.Frame(filters_frame)
+        conf_frame.pack(fill=tk.X, pady=5)
+        
+        ttk.Label(conf_frame, text="📊 Confidence Score:", 
+                 font=('Segoe UI', 9, 'bold')).pack(anchor=tk.W)
+        
+        conf_sliders = ttk.Frame(conf_frame)
+        conf_sliders.pack(fill=tk.X, pady=5)
+        
+        ttk.Label(conf_sliders, text="Min:").grid(row=0, column=0, sticky=tk.W, padx=5)
+        self.conf_min_var = tk.IntVar(value=0)
+        self.conf_min_label = ttk.Label(conf_sliders, text="0")
+        self.conf_min_label.grid(row=0, column=1, padx=5)
+        self.conf_min_slider = ttk.Scale(conf_sliders, from_=0, to=100, orient=tk.HORIZONTAL,
+                                         variable=self.conf_min_var, 
+                                         command=self.on_filter_change)
+        self.conf_min_slider.grid(row=0, column=2, sticky=tk.EW, padx=5)
+        
+        ttk.Label(conf_sliders, text="Max:").grid(row=0, column=3, sticky=tk.W, padx=5)
+        self.conf_max_var = tk.IntVar(value=100)
+        self.conf_max_label = ttk.Label(conf_sliders, text="100")
+        self.conf_max_label.grid(row=0, column=4, padx=5)
+        self.conf_max_slider = ttk.Scale(conf_sliders, from_=0, to=100, orient=tk.HORIZONTAL,
+                                         variable=self.conf_max_var,
+                                         command=self.on_filter_change)
+        self.conf_max_slider.grid(row=0, column=5, sticky=tk.EW, padx=5)
+        
+        conf_sliders.columnconfigure(2, weight=1)
+        conf_sliders.columnconfigure(5, weight=1)
+        
+        # Odds ranges
+        odds_frame = ttk.Frame(filters_frame)
+        odds_frame.pack(fill=tk.X, pady=5)
+        
+        ttk.Label(odds_frame, text="💰 Odds Ranges:", 
+                 font=('Segoe UI', 9, 'bold')).pack(anchor=tk.W)
+        
+        # Home odds
+        self._create_odds_slider(odds_frame, "Home Win:", 'home', 0)
+        # Draw odds
+        self._create_odds_slider(odds_frame, "Draw:", 'draw', 1)
+        # Away odds
+        self._create_odds_slider(odds_frame, "Away Win:", 'away', 2)
+        
+        # Variance & Edge
+        extra_frame = ttk.Frame(filters_frame)
+        extra_frame.pack(fill=tk.X, pady=5)
+        
+        # Variance
+        var_subframe = ttk.Frame(extra_frame)
+        var_subframe.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        
+        ttk.Label(var_subframe, text="📉 Max Variance:", 
+                 font=('Segoe UI', 9, 'bold')).pack(anchor=tk.W)
+        
+        var_controls = ttk.Frame(var_subframe)
+        var_controls.pack(fill=tk.X)
+        
+        self.variance_var = tk.DoubleVar(value=1.0)
+        self.variance_label = ttk.Label(var_controls, text="1.00")
+        self.variance_label.pack(side=tk.LEFT, padx=5)
+        
+        self.variance_slider = ttk.Scale(var_controls, from_=0, to=1.0, orient=tk.HORIZONTAL,
+                                        variable=self.variance_var,
+                                        command=self.on_filter_change)
+        self.variance_slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
+        
+        # Min Edge
+        edge_subframe = ttk.Frame(extra_frame)
+        edge_subframe.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10)
+        
+        ttk.Label(edge_subframe, text="💎 Min Edge (%):", 
+                 font=('Segoe UI', 9, 'bold')).pack(anchor=tk.W)
+        
+        edge_controls = ttk.Frame(edge_subframe)
+        edge_controls.pack(fill=tk.X)
+        
+        self.edge_var = tk.IntVar(value=0)
+        self.edge_label = ttk.Label(edge_controls, text="0%")
+        self.edge_label.pack(side=tk.LEFT, padx=5)
+        
+        self.edge_slider = ttk.Scale(edge_controls, from_=0, to=20, orient=tk.HORIZONTAL,
+                                     variable=self.edge_var,
+                                     command=self.on_filter_change)
+        self.edge_slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
+        
+        # Checkboxes
+        check_frame = ttk.Frame(filters_frame)
+        check_frame.pack(fill=tk.X, pady=5)
+        
+        self.value_only_var = tk.BooleanVar(value=False)
+        ttk.Checkbutton(check_frame, text="💎 Value Bets Only",
+                       variable=self.value_only_var,
+                       command=self.on_filter_change).pack(side=tk.LEFT, padx=10)
+        
+        # Quick filter presets
+        ttk.Separator(filters_frame, orient='horizontal').pack(fill=tk.X, pady=5)
+        
+        ttk.Label(filters_frame, text="⚡ Quick Filters:", 
+                 font=('Segoe UI', 9, 'bold')).pack(anchor=tk.W)
+        
+        preset_frame = ttk.Frame(filters_frame)
+        preset_frame.pack(fill=tk.X, pady=5)
+        
+        ttk.Button(preset_frame, text="🔥 High Confidence", 
+                  command=self.apply_high_confidence).pack(side=tk.LEFT, padx=2)
+        ttk.Button(preset_frame, text="💎 Value Bets", 
+                  command=self.apply_value_only).pack(side=tk.LEFT, padx=2)
+        ttk.Button(preset_frame, text="🎯 Safe Favorites", 
+                  command=self.apply_safe_favorites).pack(side=tk.LEFT, padx=2)
+        ttk.Button(preset_frame, text="🔄 Reset Filters", 
+                  command=self.reset_filters).pack(side=tk.LEFT, padx=2)
+        
+        # ===== RESULTS =====
+        results_frame = ttk.LabelFrame(scrollable_frame, text="📊 Live Results", padding="10")
+        results_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        
+        # Summary stats
+        summary_frame = ttk.Frame(results_frame)
+        summary_frame.pack(fill=tk.X, pady=5)
+        
+        self.summary_text = tk.Text(summary_frame, height=25, width=80, 
+                                    font=('Consolas', 9), bg='#F8F9FA',
+                                    relief='solid', borderwidth=1, wrap=tk.WORD)
+        summary_scroll = ttk.Scrollbar(summary_frame, orient=tk.VERTICAL, 
+                                       command=self.summary_text.yview)
+        self.summary_text.configure(yscrollcommand=summary_scroll.set)
+        
+        self.summary_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        summary_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        # ===== DETAILED TABLE =====
+        table_frame = ttk.LabelFrame(scrollable_frame, text="📋 Detailed Match List", padding="5")
+        table_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        
+        # Scrollbars
+        table_scroll_y = ttk.Scrollbar(table_frame, orient=tk.VERTICAL)
+        table_scroll_x = ttk.Scrollbar(table_frame, orient=tk.HORIZONTAL)
+        
+        # Treeview
+        columns = ('Date', 'Match', 'League', 'Pred', 'Actual', 'Conf', 'Odds', 'P/L', '✓')
+        self.detail_tree = ttk.Treeview(table_frame, columns=columns, show='headings',
+                                        yscrollcommand=table_scroll_y.set,
+                                        xscrollcommand=table_scroll_x.set,
+                                        height=10)
+        
+        table_scroll_y.config(command=self.detail_tree.yview)
+        table_scroll_x.config(command=self.detail_tree.xview)
+        
+        # Headers
+        for col in columns:
+            self.detail_tree.heading(col, text=col)
+        
+        # Widths
+        widths = [80, 200, 150, 80, 60, 50, 50, 60, 30]
+        for col, width in zip(columns, widths):
+            self.detail_tree.column(col, width=width, anchor=tk.CENTER)
+        
+        self.detail_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        table_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+        table_scroll_x.pack(side=tk.BOTTOM, fill=tk.X)
+        
+        # ===== EXPORT BUTTONS =====
+        export_frame = ttk.Frame(scrollable_frame, padding="10")
+        export_frame.pack(fill=tk.X)
+        
+        ttk.Button(export_frame, text="📊 View Calibration", 
+                  command=self.show_calibration).pack(side=tk.LEFT, padx=5)
+        ttk.Button(export_frame, text="📈 View ROI Chart", 
+                  command=self.show_roi_chart).pack(side=tk.LEFT, padx=5)
+        ttk.Button(export_frame, text="💾 Export CSV", 
+                  command=self.export_csv).pack(side=tk.LEFT, padx=5)
+        ttk.Button(export_frame, text="✕ Close", 
+                  command=self.window.destroy).pack(side=tk.RIGHT, padx=5)
+    
+    def _create_odds_slider(self, parent, label: str, odds_type: str, row: int):
+        """Crea slider per range odds"""
+        
+        frame = ttk.Frame(parent)
+        frame.pack(fill=tk.X, pady=2)
+        
+        ttk.Label(frame, text=label, width=12).grid(row=0, column=0, sticky=tk.W, padx=5)
+        
+        # Min
+        min_var = tk.DoubleVar(value=1.1)
+        setattr(self, f'{odds_type}_odds_min_var', min_var)
+        
+        min_label = ttk.Label(frame, text="1.10", width=5)
+        setattr(self, f'{odds_type}_odds_min_label', min_label)
+        min_label.grid(row=0, column=1, padx=5)
+        
+        min_slider = ttk.Scale(frame, from_=1.1, to=10.0, orient=tk.HORIZONTAL,
+                              variable=min_var,
+                              command=lambda v: self.on_odds_change(odds_type, 'min', v))
+        min_slider.grid(row=0, column=2, sticky=tk.EW, padx=5)
+        
+        ttk.Label(frame, text="to").grid(row=0, column=3, padx=5)
+        
+        # Max
+        max_var = tk.DoubleVar(value=10.0)
+        setattr(self, f'{odds_type}_odds_max_var', max_var)
+        
+        max_label = ttk.Label(frame, text="10.00", width=5)
+        setattr(self, f'{odds_type}_odds_max_label', max_label)
+        max_label.grid(row=0, column=4, padx=5)
+        
+        max_slider = ttk.Scale(frame, from_=1.1, to=10.0, orient=tk.HORIZONTAL,
+                              variable=max_var,
+                              command=lambda v: self.on_odds_change(odds_type, 'max', v))
+        max_slider.grid(row=0, column=5, sticky=tk.EW, padx=5)
+        
+        frame.columnconfigure(2, weight=1)
+        frame.columnconfigure(5, weight=1)
+    
+    def setup_date_range(self):
+        """Setup combo dates"""
+        if not self.available_dates:
+            return
+        
+        self.start_date_combo['values'] = self.available_dates
+        self.end_date_combo['values'] = self.available_dates
+        
+        # Default: primo e ultimo
+        self.start_date_var.set(self.available_dates[0])
+        self.end_date_var.set(self.available_dates[-1])
+    
+    def set_quick_range(self, days: int):
+        """Set quick date range"""
+        if not self.available_dates:
+            return
+        
+        end_date = datetime.strptime(self.available_dates[-1], '%Y-%m-%d')
+        start_date = end_date - timedelta(days=days)
+        
+        # Trova date più vicine
+        closest_start = min(self.available_dates, 
+                           key=lambda d: abs((datetime.strptime(d, '%Y-%m-%d') - start_date).days))
+        
+        self.start_date_var.set(closest_start)
+        self.end_date_var.set(self.available_dates[-1])
+        
+        self.load_and_analyze()
+    
+    def set_all_dates(self):
+        """Set all available dates"""
+        if not self.available_dates:
+            return
+        
+        self.start_date_var.set(self.available_dates[0])
+        self.end_date_var.set(self.available_dates[-1])
+        
+        self.load_and_analyze()
+    
+    def on_filter_change(self, *args):
+        """Callback per cambio filtro"""
+        
+        # Update labels
+        self.conf_min_label.config(text=f"{self.conf_min_var.get()}")
+        self.conf_max_label.config(text=f"{self.conf_max_var.get()}")
+        self.variance_label.config(text=f"{self.variance_var.get():.2f}")
+        self.edge_label.config(text=f"{self.edge_var.get()}%")
+        
+        # Update filters dict
+        self.filters['min_confidence'] = self.conf_min_var.get()
+        self.filters['max_confidence'] = self.conf_max_var.get()
+        self.filters['max_variance'] = self.variance_var.get()
+        self.filters['min_edge'] = self.edge_var.get()
+        self.filters['value_only'] = self.value_only_var.get()
+        
+        # Re-analyze
+        self.analyze_with_filters()
+    
+    def on_odds_change(self, odds_type: str, min_max: str, value):
+        """Callback per cambio odds"""
+        
+        value = float(value)
+        
+        # Update label
+        label = getattr(self, f'{odds_type}_odds_{min_max}_label')
+        label.config(text=f"{value:.2f}")
+        
+        # Update filters
+        self.filters[f'{odds_type}_odds_{min_max}'] = value
+        
+        # Re-analyze
+        self.analyze_with_filters()
+    
+    def apply_high_confidence(self):
+        """Preset: High confidence"""
+        self.conf_min_var.set(75)
+        self.conf_max_var.set(100)
+        self.value_only_var.set(False)
+        self.on_filter_change()
+    
+    def apply_value_only(self):
+        """Preset: Value bets only"""
+        self.value_only_var.set(True)
+        self.edge_var.set(7)
+        self.on_filter_change()
+    
+    def apply_safe_favorites(self):
+        """Preset: Safe favorites"""
+        self.home_odds_min_var.set(1.5)
+        self.home_odds_max_var.set(2.0)
+        self.conf_min_var.set(70)
+        self.variance_var.set(0.3)
+        self.on_filter_change()
+    
+    def reset_filters(self):
+        """Reset all filters"""
+        self.conf_min_var.set(0)
+        self.conf_max_var.set(100)
+        self.home_odds_min_var.set(1.1)
+        self.home_odds_max_var.set(10.0)
+        self.draw_odds_min_var.set(1.1)
+        self.draw_odds_max_var.set(10.0)
+        self.away_odds_min_var.set(1.1)
+        self.away_odds_max_var.set(10.0)
+        self.variance_var.set(1.0)
+        self.edge_var.set(0)
+        self.value_only_var.set(False)
+        self.on_filter_change()
+    
+    def load_and_analyze(self):
+        """Load data and analyze"""
+        
+        try:
+            start_str = self.start_date_var.get()
+            end_str = self.end_date_var.get()
+            
+            if not start_str or not end_str:
+                return
+            
+            start_date = datetime.strptime(start_str, '%Y-%m-%d')
+            end_date = datetime.strptime(end_str, '%Y-%m-%d')
+            
+            # Load predictions
+            self.all_predictions = self.manager.load_predictions(start_date, end_date)
+            
+            if not self.all_predictions:
+                self.display_no_data()
+                return
+            
+            # Analyze
+            self.analyze_with_filters()
+        
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to load data:\n\n{str(e)}")
+    
+    def analyze_with_filters(self):
+        """Analyze with current filters"""
+        
+        if not self.all_predictions:
+            return
+        
+        try:
+            # Analyze
+            self.current_results = self.manager.analyze_predictions(
+                self.all_predictions,
+                self.filters
+            )
+            
+            # Display
+            self.display_results()
+            self.populate_detail_table()
+        
+        except Exception as e:
+            messagebox.showerror("Error", f"Analysis error:\n\n{str(e)}")
+    
+    def display_results(self):
+        """Display results in summary text"""
+        
+        self.summary_text.config(state='normal')
+        self.summary_text.delete('1.0', tk.END)
+        
+        if not self.current_results:
+            self.summary_text.insert('1.0', "No results to display")
+            self.summary_text.config(state='disabled')
+            return
+        
+        results = self.current_results
+        
+        text = ""
+        text += f"🎯 FILTERED MATCHES: {results['total_matches']} / {results['original_matches']}\n\n"
+        
+        # Accuracy
+        acc = results['accuracy']
+        text += "✅ ACCURACY METRICS:\n"
+        text += f"  ├─ Top 1 Correct:  {acc['top_1_count']}/{acc['total']}  ({acc['top_1']:.1f}%) {'█'*int(acc['top_1']/10)}{'░'*int((100-acc['top_1'])/10)}\n"
+        text += f"  ├─ Top 2 Correct:  {acc['top_2_count']}/{acc['total']}  ({acc['top_2']:.1f}%) {'█'*int(acc['top_2']/10)}{'░'*int((100-acc['top_2'])/10)}\n"
+        
+        bs_rating = "🟢 Excellent" if results['brier_score'] < 0.22 else "🟡 Good" if results['brier_score'] < 0.28 else "🔴 Poor"
+        text += f"  ├─ Brier Score:    {results['brier_score']:.3f}  {bs_rating}\n"
+        text += f"  └─ Log Loss:       {results['log_loss']:.3f}\n\n"
+        
+        # Value bets
+        vb = results['value_bets']
+        if vb['total_bets'] > 0:
+            text += "💰 VALUE BETS PERFORMANCE:\n"
+            text += f"  ├─ Total Bets:     {vb['total_bets']}\n"
+            text += f"  ├─ Won:            {vb['won']}  ({vb['win_rate']:.1f}%)\n"
+            text += f"  ├─ Lost:           {vb['lost']}\n"
+            text += f"  ├─ Total Staked:   €{vb['total_staked']:.2f}\n"
+            text += f"  ├─ Total Return:   €{vb['total_return']:.2f}\n"
+            
+            profit_icon = "🟢" if vb['net_profit'] > 0 else "🔴"
+            text += f"  ├─ Net Profit:     €{vb['net_profit']:.2f}  {profit_icon}\n"
+            
+            roi_icon = "🟢🟢" if vb['roi'] > 15 else "🟢" if vb['roi'] > 5 else "🟡" if vb['roi'] > 0 else "🔴"
+            text += f"  ├─ ROI:            {vb['roi']:+.1f}%  {roi_icon}\n"
+            
+            text += f"  ├─ Avg Odds:       {vb['avg_odds']:.2f}\n"
+            text += f"  └─ Sharpe Ratio:   {vb['sharpe_ratio']:.2f}\n\n"
+        else:
+            text += "💰 VALUE BETS: None in filtered data\n\n"
+        
+        # By confidence
+        if results['by_confidence']:
+            text += "📈 BY CONFIDENCE RANGE:\n"
+            for range_name, data in results['by_confidence'].items():
+                if data['count'] > 0:
+                    bar = "█" * int(data['roi'] / 3) if data['roi'] > 0 else ""
+                    text += f"  ├─ {range_name}:  {data['count']} bets, ROI {data['roi']:+.1f}%  {bar}\n"
+            text += "\n"
+        
+        # By league
+        if results['by_league']:
+            text += "🏆 BY LEAGUE (Top 10):\n"
+            sorted_leagues = sorted(results['by_league'].items(), 
+                                   key=lambda x: x[1]['count'], reverse=True)
+            for league, data in sorted_leagues[:10]:
+                text += f"  ├─ {league[:30]:30}  {data['count']} bets, ROI {data['roi']:+.1f}%\n"
+            text += "\n"
+        
+        # By market
+        if results['by_market']:
+            text += "📊 BY MARKET:\n"
+            for market, data in results['by_market'].items():
+                text += f"  ├─ {market:15}  {data['count']} bets, Win Rate {data['win_rate']:.1f}%, ROI {data['roi']:+.1f}%\n"
+            text += "\n"
+        
+        self.summary_text.insert('1.0', text)
+        self.summary_text.config(state='disabled')
+    
+    def display_no_data(self):
+        """Display no data message"""
+        self.summary_text.config(state='normal')
+        self.summary_text.delete('1.0', tk.END)
+        self.summary_text.insert('1.0', 
+            "❌ NO DATA FOUND\n\n"
+            "No predictions with actual results in selected date range.\n\n"
+            "Make sure you have:\n"
+            "1. Archived predictions for past dates\n"
+            "2. Added actual results to JSON files\n"
+            "3. Selected correct date range"
+        )
+        self.summary_text.config(state='disabled')
+    
+    def populate_detail_table(self):
+        """Populate detailed match table"""
+        
+        # Clear
+        for item in self.detail_tree.get_children():
+            self.detail_tree.delete(item)
+        
+        if not self.current_results or not self.current_results['matches_details']:
+            return
+        
+        # Populate
+        for pred_data in self.current_results['matches_details']:
+            match_info = pred_data.get('match', {})
+            pred = pred_data.get('prediction', {})
+            actual = pred_data.get('actual', {})
+            odds = pred_data.get('odds', {})
+            
+            # Date
+            date_str = match_info.get('date', '')
+            
+            # Match
+            match_str = f"{match_info.get('home_team', '')} vs {match_info.get('away_team', '')}"
+            
+            # League
+            league_str = match_info.get('league', '')
+            
+            # Predicted
+            probs = [
+                (pred.get('home_win_prob', 0), '1'),
+                (pred.get('draw_prob', 0), 'X'),
+                (pred.get('away_win_prob', 0), '2')
+            ]
+            top_pred = max(probs, key=lambda x: x[0])
+            pred_str = f"{top_pred[1]} ({top_pred[0]*100:.0f}%)"
+            
+            # Actual
+            actual_outcome = actual.get('outcome', '-')
+            
+            # Confidence
+            conf_str = f"{pred.get('confidence_score', 0):.0f}"
+            
+            # Odds (of predicted outcome)
+            if top_pred[1] == '1':
+                odds_val = odds.get('home_win', 0)
+            elif top_pred[1] == 'X':
+                odds_val = odds.get('draw', 0)
+            else:
+                odds_val = odds.get('away_win', 0)
+            
+            odds_str = f"{odds_val:.2f}" if odds_val > 0 else '-'
+            
+            # P/L (simulate €10 bet)
+            if actual_outcome and odds_val > 0:
+                if top_pred[1] == actual_outcome:
+                    profit = (10 * odds_val) - 10
+                    pl_str = f"+€{profit:.1f}"
+                    correct_icon = "✓"
+                else:
+                    pl_str = "-€10"
+                    correct_icon = "✗"
+            else:
+                pl_str = "-"
+                correct_icon = "-"
+            
+            # Insert
+            values = (date_str, match_str, league_str, pred_str, actual_outcome, 
+                     conf_str, odds_str, pl_str, correct_icon)
+            
+            # Color code
+            if correct_icon == "✓":
+                tag = 'win'
+            elif correct_icon == "✗":
+                tag = 'loss'
+            else:
+                tag = ''
+            
+            self.detail_tree.insert('', tk.END, values=values, tags=(tag,))
+        
+        # Configure tags
+        self.detail_tree.tag_configure('win', background='#E8F5E9')  # Verde
+        self.detail_tree.tag_configure('loss', background='#FFEBEE')  # Rosa
+    
+    def show_calibration(self):
+        """Show calibration plot (text-based)"""
+        
+        if not self.current_results or not self.current_results['calibration']:
+            messagebox.showinfo("No Data", "No calibration data available")
+            return
+        
+        cal = self.current_results['calibration']
+        
+        # Create window
+        cal_window = tk.Toplevel(self.window)
+        cal_window.title("📊 Calibration Analysis")
+        cal_window.geometry("600x400")
+        
+        text = tk.Text(cal_window, font=('Consolas', 10), wrap=tk.WORD)
+        text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        output = "📊 CALIBRATION ANALYSIS\n"
+        output += "=" * 60 + "\n\n"
+        output += "Shows if predicted probabilities match actual win rates\n"
+        output += "(Perfect calibration = predicted ≈ actual)\n\n"
+        output += "-" * 60 + "\n"
+        output += "Range      | Count | Predicted | Actual | Diff\n"
+        output += "-" * 60 + "\n"
+        
+        for bin_name, data in sorted(cal.items()):
+            if data['count'] > 0:
+                pred_bar = "█" * int(data['avg_predicted'] / 10)
+                actual_bar = "█" * int(data['avg_actual'] / 10)
+                
+                output += f"{bin_name:10} | {data['count']:5} | {data['avg_predicted']:5.1f}% {pred_bar}\n"
+                output += f"{'':10} | {'':5} | {data['avg_actual']:5.1f}% {actual_bar} (actual)\n"
+                
+                if data['diff'] < 5:
+                    rating = "🟢 Excellent"
+                elif data['diff'] < 10:
+                    rating = "🟡 Good"
+                else:
+                    rating = "🔴 Poor"
+                
+                output += f"{'':10} | Diff: {data['diff']:.1f}%  {rating}\n\n"
+        
+        output += "-" * 60 + "\n"
+        output += "\n💡 Interpretation:\n"
+        output += "  • Diff < 5%:  Excellent calibration\n"
+        output += "  • Diff < 10%: Good calibration\n"
+        output += "  • Diff > 10%: Model needs improvement\n"
+        
+        text.insert('1.0', output)
+        text.config(state='disabled')
+    
+    def show_roi_chart(self):
+        """Show ROI chart (text-based)"""
+        
+        if not self.current_results or not self.current_results['value_bets']['bets']:
+            messagebox.showinfo("No Data", "No value bets data available")
+            return
+        
+        bets = self.current_results['value_bets']['bets']
+        
+        # Create window
+        roi_window = tk.Toplevel(self.window)
+        roi_window.title("📈 ROI Analysis")
+        roi_window.geometry("800x500")
+        
+        text = tk.Text(roi_window, font=('Consolas', 9), wrap=tk.NONE)
+        scrollbar_y = ttk.Scrollbar(roi_window, orient=tk.VERTICAL, command=text.yview)
+        scrollbar_x = ttk.Scrollbar(roi_window, orient=tk.HORIZONTAL, command=text.xview)
+        
+        text.configure(yscrollcommand=scrollbar_y.set, xscrollcommand=scrollbar_x.set)
+        
+        text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
+        scrollbar_x.pack(side=tk.BOTTOM, fill=tk.X)
+        
+        # Calculate cumulative ROI
+        cumulative_staked = 0
+        cumulative_return = 0
+        roi_points = []
+        
+        for bet in bets:
+            cumulative_staked += bet['stake']
+            cumulative_return += bet['return']
+            roi = ((cumulative_return - cumulative_staked) / cumulative_staked * 100) if cumulative_staked > 0 else 0
+            roi_points.append(roi)
+        
+        # Generate chart
+        output = "📈 CUMULATIVE ROI CHART\n"
+        output += "=" * 80 + "\n\n"
+        
+        max_roi = max(roi_points) if roi_points else 0
+        min_roi = min(roi_points) if roi_points else 0
+        
+        # Scale
+        chart_height = 20
+        roi_range = max(max_roi - min_roi, 10)
+        
+        output += f"  ROI\n"
+        
+        for i in range(chart_height, -1, -1):
+            roi_level = min_roi + (roi_range * i / chart_height)
+            output += f"{roi_level:6.1f}% ┤"
+            
+            for j, roi in enumerate(roi_points):
+                if abs(roi - roi_level) < (roi_range / chart_height):
+                    output += "●"
+                elif roi > roi_level:
+                    output += " "
+                else:
+                    output += " "
+            
+            output += "\n"
+        
+        output += "        └" + "─" * len(roi_points) + "\n"
+        output += "         Bet Number\n\n"
+        
+        output += f"Final ROI: {roi_points[-1]:.2f}%\n"
+        output += f"Peak ROI:  {max_roi:.2f}%\n"
+        output += f"Min ROI:   {min_roi:.2f}%\n"
+        output += f"Total Bets: {len(bets)}\n"
+        
+        text.insert('1.0', output)
+        text.config(state='disabled')
+    
+    def export_csv(self):
+        """Export detailed results to CSV"""
+        
+        if not self.current_results or not self.current_results['matches_details']:
+            messagebox.showwarning("Warning", "No data to export")
+            return
+        
+        from tkinter import filedialog
+        import csv
+        
+        filename = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv")],
+            initialfile=f"backtesting_{datetime.now().strftime('%Y%m%d_%H%M')}.csv"
+        )
+        
+        if not filename:
+            return
+        
+        try:
+            with open(filename, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                
+                # Header
+                writer.writerow([
+                    'Date', 'League', 'Home Team', 'Away Team',
+                    'Home Win Prob', 'Draw Prob', 'Away Win Prob',
+                    'Predicted', 'Actual', 'Correct',
+                    'Home Odds', 'Draw Odds', 'Away Odds',
+                    'Confidence Score', 'Variance',
+                    'Home xG', 'Away xG', 'Total xG',
+                    'Value Bet Market', 'Value Bet Odds', 'Value Bet Edge',
+                    'P/L (€10 stake)'
+                ])
+                
+                # Data
+                for pred_data in self.current_results['matches_details']:
+                    match_info = pred_data.get('match', {})
+                    pred = pred_data.get('prediction', {})
+                    actual = pred_data.get('actual', {})
+                    odds = pred_data.get('odds', {})
+                    
+                    # Determine predicted
+                    probs = [
+                        (pred.get('home_win_prob', 0), '1'),
+                        (pred.get('draw_prob', 0), 'X'),
+                        (pred.get('away_win_prob', 0), '2')
+                    ]
+                    top_pred = max(probs, key=lambda x: x[0])
+                    
+                    # Correct?
+                    actual_outcome = actual.get('outcome', '')
+                    correct = 'Yes' if top_pred[1] == actual_outcome else 'No' if actual_outcome else 'N/A'
+                    
+                    # P/L
+                    if actual_outcome and top_pred[1] in ['1', 'X', '2']:
+                        bet_odds = odds.get('home_win', 0) if top_pred[1] == '1' else \
+                                  odds.get('draw', 0) if top_pred[1] == 'X' else \
+                                  odds.get('away_win', 0)
+                        
+                        if correct == 'Yes' and bet_odds > 0:
+                            pl = (10 * bet_odds) - 10
+                        else:
+                            pl = -10
+                    else:
+                        pl = 0
+                    
+                    # Value bet
+                    value_bets = pred.get('value_bets', [])
+                    if value_bets:
+                        vb = value_bets[0]
+                        vb_market = vb.get('market', '')
+                        vb_odds = vb.get('bookmaker_odds', 0)
+                        vb_edge = vb.get('adjusted_edge', 0)
+                    else:
+                        vb_market = ''
+                        vb_odds = 0
+                        vb_edge = 0
+                    
+                    # Write row
+                    writer.writerow([
+                        match_info.get('date', ''),
+                        match_info.get('league', ''),
+                        match_info.get('home_team', ''),
+                        match_info.get('away_team', ''),
+                        f"{pred.get('home_win_prob', 0):.4f}",
+                        f"{pred.get('draw_prob', 0):.4f}",
+                        f"{pred.get('away_win_prob', 0):.4f}",
+                        top_pred[1],
+                        actual_outcome,
+                        correct,
+                        f"{odds.get('home_win', 0):.2f}",
+                        f"{odds.get('draw', 0):.2f}",
+                        f"{odds.get('away_win', 0):.2f}",
+                        f"{pred.get('confidence_score', 0):.1f}",
+                        f"{pred.get('prediction_variance', 0):.3f}",
+                        f"{pred.get('home_xg', 0):.2f}",
+                        f"{pred.get('away_xg', 0):.2f}",
+                        f"{pred.get('total_xg', 0):.2f}",
+                        vb_market,
+                        f"{vb_odds:.2f}",
+                        f"{vb_edge:.2f}",
+                        f"{pl:.2f}"
+                    ])
+            
+            messagebox.showinfo("Success", f"Exported to:\n{filename}")
+        
+        except Exception as e:
+            messagebox.showerror("Error", f"Export failed:\n\n{str(e)}")
 
 def main():
     root = tk.Tk()

@@ -1,11 +1,11 @@
 """
 src/analysis/league_analyzer.py
-Analizzatore statistiche campionato e classifica completa
+Analizzatore statistiche campionato - VERSIONE SEMPLIFICATA
+Ora la maggior parte dell'analisi è fatta direttamente in prediction_engine
 """
 
 from typing import List, Dict, Optional
 from dataclasses import dataclass
-from collections import defaultdict
 
 
 @dataclass
@@ -33,107 +33,131 @@ class LeagueStats:
     bts_percentage: float
     
     # Forza campionato
-    avg_home_advantage: float  # Differenza gol casa vs trasferta
-    league_competitiveness: float  # Varianza punti (0-1, più alto = più equilibrato)
+    avg_home_advantage: float
+    league_competitiveness: float
     
     # Classifica completa
-    standings: List[Dict]  # Lista squadre ordinate per punti
+    standings: List[Dict]
 
 
 class LeagueAnalyzer:
-    """Analizza campionati e genera statistiche aggregate"""
+    """
+    Analizzatore campionati - WRAPPER SEMPLIFICATO
+    
+    Ora i dati del campionato arrivano già estratti in match.league_statistics
+    Questo modulo serve solo per compatibilità con codice esistente
+    """
     
     def __init__(self):
-        self.league_cache = {}  # Cache statistiche per campionato
+        self.league_cache = {}
     
     def analyze_league(self, matches: List, league_name: str) -> Optional[LeagueStats]:
         """
-        Analizza tutte le partite di un campionato
+        Analizza campionato
         
-        Args:
-            matches: Lista di Match dello stesso campionato
-            league_name: Nome del campionato
-            
-        Returns:
-            LeagueStats con tutte le statistiche
+        Mantenuto per compatibilità con codice esistente
         """
         
-        # Filtra solo partite del campionato richiesto
         league_matches = [m for m in matches if m.league == league_name]
         
         if not league_matches:
             return None
         
-        # Usa cache se disponibile
-        cache_key = f"{league_name}_{len(league_matches)}"
-        if cache_key in self.league_cache:
-            return self.league_cache[cache_key]
+        # Prova a usare league_statistics del primo match
+        first_match = league_matches[0]
+        if first_match.league_statistics:
+            return self._from_league_statistics(
+                first_match.league_statistics, 
+                league_name,
+                first_match.league_standings or []
+            )
         
-        # Calcola statistiche
-        stats = self._calculate_league_stats(league_matches, league_name)
-        
-        # Salva in cache
-        self.league_cache[cache_key] = stats
-        
-        return stats
+        # Fallback: calcolo manuale (meno accurato)
+        return self._calculate_league_stats_fallback(league_matches, league_name)
     
-    def _calculate_league_stats(self, matches: List, league_name: str) -> LeagueStats:
-        """Calcola tutte le statistiche del campionato"""
+    def _from_league_statistics(
+        self, stats: Dict, league_name: str, standings: List[Dict]
+    ) -> LeagueStats:
+        """Converte league_statistics in LeagueStats"""
         
-        total_matches = len(matches)
+        avg_goals = stats.get('avg_goals', 2.6)
+        avg_home = stats.get('avg_home_goals', 1.4)
+        avg_away = stats.get('avg_away_goals', 1.2)
         
-        # Raccogli dati da tutte le partite
+        home_win_pct = stats.get('home_win_pct', 45.0)
+        draw_pct = stats.get('draw_pct', 27.0)
+        away_win_pct = stats.get('away_win_pct', 28.0)
+        
+        # Over/Under
+        over_under = stats.get('over_under', {})
+        over_0_5 = over_under.get('0.5', {}).get('over', 90.0)
+        over_1_5 = over_under.get('1.5', {}).get('over', 75.0)
+        over_2_5 = over_under.get('2.5', {}).get('over', 50.0)
+        over_3_5 = over_under.get('3.5', {}).get('over', 25.0)
+        
+        bts_pct = stats.get('bts_pct', 50.0)
+        
+        total_matches = stats.get('total_matches', 0)
+        
+        # Home advantage
+        home_advantage = avg_home - avg_away if avg_home > 0 and avg_away > 0 else 0.2
+        
+        # Competitiveness
+        if total_matches > 0:
+            variance = ((home_win_pct - 33.3)**2 + (draw_pct - 33.3)**2 + (away_win_pct - 33.3)**2) / 3
+            competitiveness = 1 - (variance / 1000)
+            competitiveness = max(0, min(1, competitiveness))
+        else:
+            competitiveness = 0.5
+        
+        return LeagueStats(
+            league_name=league_name,
+            total_matches=total_matches,
+            avg_goals_per_match=avg_goals,
+            avg_home_goals=avg_home,
+            avg_away_goals=avg_away,
+            home_win_percentage=home_win_pct,
+            draw_percentage=draw_pct,
+            away_win_percentage=away_win_pct,
+            over_0_5_percentage=over_0_5,
+            over_1_5_percentage=over_1_5,
+            over_2_5_percentage=over_2_5,
+            over_3_5_percentage=over_3_5,
+            bts_percentage=bts_pct,
+            avg_home_advantage=home_advantage,
+            league_competitiveness=competitiveness,
+            standings=standings
+        )
+    
+    def _calculate_league_stats_fallback(self, matches: List, league_name: str) -> LeagueStats:
+        """Calcolo fallback se league_statistics non disponibile"""
+        
+        total = len(matches)
+        
+        # Medie stimate da statistiche squadre
         total_goals = 0
         home_goals = 0
         away_goals = 0
-        
-        home_wins = 0
-        draws = 0
-        away_wins = 0
-        
-        over_counts = {0.5: 0, 1.5: 0, 2.5: 0, 3.5: 0}
-        bts_count = 0
-        
-        # Raccogli standings (usa prima partita con standings completi)
-        standings_dict = {}
+        count = 0
         
         for match in matches:
-            # Stats dai dati aggregati delle squadre
             if match.home_stats and match.away_stats:
-                # Stima gol dalla media
-                est_home_goals = match.home_stats.avg_goals_scored
-                est_away_goals = match.away_stats.avg_goals_scored
+                est_home = match.home_stats.avg_goals_scored
+                est_away = match.away_stats.avg_goals_scored
                 
-                total_goals += est_home_goals + est_away_goals
-                home_goals += est_home_goals
-                away_goals += est_away_goals
-                
-                total_match_goals = est_home_goals + est_away_goals
-                
-                # Over/Under
-                if total_match_goals > 0.5:
-                    over_counts[0.5] += 1
-                if total_match_goals > 1.5:
-                    over_counts[1.5] += 1
-                if total_match_goals > 2.5:
-                    over_counts[2.5] += 1
-                if total_match_goals > 3.5:
-                    over_counts[3.5] += 1
-                
-                # BTS (se entrambe le medie > 0.5)
-                if est_home_goals > 0.5 and est_away_goals > 0.5:
-                    bts_count += 1
-                
-                # 1X2 (stima da medie)
-                if est_home_goals > est_away_goals + 0.3:
-                    home_wins += 1
-                elif abs(est_home_goals - est_away_goals) <= 0.3:
-                    draws += 1
-                else:
-                    away_wins += 1
-            
-            # Raccogli standings
-            if match.home_standing and match.home_standing.team_name:
+                total_goals += est_home + est_away
+                home_goals += est_home
+                away_goals += est_away
+                count += 1
+        
+        avg_goals = total_goals / count if count > 0 else 2.6
+        avg_home = home_goals / count if count > 0 else 1.4
+        avg_away = away_goals / count if count > 0 else 1.2
+        
+        # Standings
+        standings_dict = {}
+        for match in matches:
+            if match.home_standing:
                 standings_dict[match.home_standing.team_name] = {
                     'team': match.home_standing.team_name,
                     'position': match.home_standing.position,
@@ -146,97 +170,41 @@ class LeagueAnalyzer:
                     'ga': match.home_standing.goals_against,
                     'gd': match.home_standing.goal_difference
                 }
-            
-            if match.away_standing and match.away_standing.team_name:
-                standings_dict[match.away_standing.team_name] = {
-                    'team': match.away_standing.team_name,
-                    'position': match.away_standing.position,
-                    'points': match.away_standing.points,
-                    'played': match.away_standing.matches_played,
-                    'wins': match.away_standing.wins,
-                    'draws': match.away_standing.draws,
-                    'losses': match.away_standing.losses,
-                    'gf': match.away_standing.goals_for,
-                    'ga': match.away_standing.goals_against,
-                    'gd': match.away_standing.goal_difference
-                }
         
-        # Calcola medie
-        avg_goals = total_goals / total_matches if total_matches > 0 else 2.5
-        avg_home = home_goals / total_matches if total_matches > 0 else 1.4
-        avg_away = away_goals / total_matches if total_matches > 0 else 1.1
-        
-        # Percentuali
-        home_win_pct = (home_wins / total_matches * 100) if total_matches > 0 else 45
-        draw_pct = (draws / total_matches * 100) if total_matches > 0 else 27
-        away_win_pct = (away_wins / total_matches * 100) if total_matches > 0 else 28
-        
-        over_pcts = {
-            k: (v / total_matches * 100) if total_matches > 0 else 50 
-            for k, v in over_counts.items()
-        }
-        
-        bts_pct = (bts_count / total_matches * 100) if total_matches > 0 else 50
-        
-        # Home advantage
-        home_advantage = avg_home - avg_away
-        
-        # Competitiveness (varianza punti normalizzata)
-        if standings_dict:
-            points_list = [s['points'] for s in standings_dict.values()]
-            if len(points_list) > 1:
-                variance = sum((p - sum(points_list)/len(points_list))**2 for p in points_list) / len(points_list)
-                competitiveness = 1 - (variance / 100)  # Normalizza (0-1)
-                competitiveness = max(0, min(1, competitiveness))
-            else:
-                competitiveness = 0.5
-        else:
-            competitiveness = 0.5
-        
-        # Ordina standings per punti
         standings_list = sorted(
-            standings_dict.values(), 
-            key=lambda x: (x['points'], x['gd']), 
+            standings_dict.values(),
+            key=lambda x: (x['points'], x['gd']),
             reverse=True
         )
         
         return LeagueStats(
             league_name=league_name,
-            total_matches=total_matches,
+            total_matches=total,
             avg_goals_per_match=avg_goals,
             avg_home_goals=avg_home,
             avg_away_goals=avg_away,
-            home_win_percentage=home_win_pct,
-            draw_percentage=draw_pct,
-            away_win_percentage=away_win_pct,
-            over_0_5_percentage=over_pcts[0.5],
-            over_1_5_percentage=over_pcts[1.5],
-            over_2_5_percentage=over_pcts[2.5],
-            over_3_5_percentage=over_pcts[3.5],
-            bts_percentage=bts_pct,
-            avg_home_advantage=home_advantage,
-            league_competitiveness=competitiveness,
+            home_win_percentage=45.0,
+            draw_percentage=27.0,
+            away_win_percentage=28.0,
+            over_0_5_percentage=90.0,
+            over_1_5_percentage=75.0,
+            over_2_5_percentage=50.0,
+            over_3_5_percentage=25.0,
+            bts_percentage=50.0,
+            avg_home_advantage=avg_home - avg_away,
+            league_competitiveness=0.5,
             standings=standings_list
         )
     
     def get_league_adjustment_factors(self, league_stats: LeagueStats) -> Dict[str, float]:
         """
-        Calcola fattori di aggiustamento per le predizioni basati sul campionato
-        
-        Returns:
-            Dict con fattori moltiplicativi per xG, home advantage, ecc.
+        Calcola fattori di aggiustamento per le predizioni
+        (Deprecato - ora fatto in prediction_engine)
         """
         
-        # Fattore gol (rispetto a media generale ~2.5)
         goal_factor = league_stats.avg_goals_per_match / 2.5
-        
-        # Fattore home advantage (rispetto a standard ~0.3)
         home_factor = league_stats.avg_home_advantage / 0.3
-        
-        # Fattore draw (campionati con più pareggi)
-        draw_factor = league_stats.draw_percentage / 27  # 27% è media
-        
-        # Fattore imprevedibilità (più competitivo = più imprevedibile)
+        draw_factor = league_stats.draw_percentage / 27
         unpredictability = league_stats.league_competitiveness
         
         return {
@@ -257,15 +225,6 @@ class LeagueAnalyzer:
     ) -> str:
         """
         Formatta classifica completa con evidenziazione squadre
-        
-        Args:
-            league_stats: Statistiche campionato
-            home_team: Nome squadra casa (da evidenziare)
-            away_team: Nome squadra trasferta (da evidenziare)
-            max_teams: Numero massimo squadre da mostrare
-            
-        Returns:
-            Stringa formattata con classifica
         """
         
         if not league_stats.standings:

@@ -1,10 +1,12 @@
 {
   "geometry": "2560x1369+-148+107",
   "column_widths": {
+    "\ud83c\udfaf": 50,
     "Ora": 74,
     "Lega": 231,
     "Casa": 140,
     "Trasf": 152,
+    "\u26bd Ris": 60,
     "1": 58,
     "X": 52,
     "2": 52,
@@ -32,10 +34,15 @@
     "A_GF_Away": 103,
     "A_GS_Away": 55,
     "Form H": 50,
-    "Form A": 50
+    "Form A": 50,
+    "\ud83c\udfaf Bet #1": 100,
+    "\ud83d\udcca Conf #1": 50,
+    "\ud83c\udfaf Bet #2": 100,
+    "\ud83d\udcca Conf #2": 50
   },
   "filters": {
     "hide_no_odds": true,
     "hide_no_stats": true
-  }
+  },
+  "details_sash_position": 1961
 }

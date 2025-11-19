@@ -321,9 +321,6 @@ class MatchScraper:
         if not html:
             return None
         
-        # DEBUG: Salva HTML
-        self._save_debug_html(html, f"standings_{league_key.replace('/', '_')}.html")
-        
         return self._parse_standings_page_full(html)
     
     def _parse_standings_page_full(self, html: str) -> Dict:
@@ -517,9 +514,6 @@ class MatchScraper:
         html = await self._fetch_page(url)
         if not html:
             return None
-        
-        # DEBUG: Salva HTML
-        self._save_debug_html(html, f"statistics_{league_key.replace('/', '_')}.html")
         
         return self._parse_statistics_page(html)
     
@@ -1158,22 +1152,7 @@ class MatchScraper:
         
         return h2h_matches
     
-    # ========== UTILITY ==========
-    
-    def _save_debug_html(self, html: str, filename: str):
-        """Salva HTML per debug"""
-        try:
-            debug_dir = Path("debug_html")
-            debug_dir.mkdir(exist_ok=True)
-            
-            filepath = debug_dir / filename
-            with open(filepath, 'w', encoding='utf-8') as f:
-                f.write(html)
-            
-            logger.info(f"💾 HTML salvato: {filepath}")
-        except Exception as e:
-            logger.warning(f"⚠️ Impossibile salvare HTML debug: {e}")
-    
+
     # ========== EXPORT CACHE ==========
     
     def export_league_data(self, output_dir: str = "league_data"):
@@ -1203,3 +1182,112 @@ class MatchScraper:
             import traceback
             traceback.print_exc()
             return None
+        
+    async def get_match_results(self, date: datetime) -> Dict[str, Dict]:
+        """
+        Scarica risultati reali dalla pagina di ogni singola partita
+        
+        Returns:
+            Dict: {match_url: {'outcome': '1'/'X'/'2', 'score': '2-1', 'home_goals': 2, 'away_goals': 1}}
+        """
+        
+        # Prima scarica la lista per avere gli URL
+        url = self._build_date_url(date)
+        logger.info(f"🔍 DEBUG: Fetching match list from {url}")
+        
+        html = await self._fetch_page(url)
+        if not html:
+            logger.error("❌ DEBUG: No HTML received")
+            return {}
+        
+        soup = BeautifulSoup(html, 'html.parser')
+        games_container = soup.find('div', id='games')
+        
+        if not games_container:
+            logger.error("❌ DEBUG: No #games container found")
+            return {}
+        
+        game_links = games_container.find_all('a', class_='game')
+        logger.info(f"🎮 DEBUG: Found {len(game_links)} matches")
+        
+        # Estrai URL di tutte le partite
+        match_urls = []
+        for game_link in game_links:
+            href = game_link.get('href', '')
+            if href:
+                match_url = self.BASE_URL + href if href.startswith('/') else href
+                match_urls.append(match_url)
+        
+        logger.info(f"📥 DEBUG: Downloading {len(match_urls)} individual match pages...")
+        
+        # Scarica ogni pagina match per estrarre il risultato
+        results = {}
+        
+        for idx, match_url in enumerate(match_urls, 1):
+            try:
+                logger.info(f"🔍 DEBUG #{idx}/{len(match_urls)}: {match_url}")
+                
+                match_html = await self._fetch_page(match_url)
+                
+                if not match_html:
+                    logger.warning(f"⚠️ DEBUG #{idx}: No HTML")
+                    continue
+                
+                match_soup = BeautifulSoup(match_html, 'html.parser')
+                
+                # CERCA <p id="gameResult">2 - 0</p>
+                result_elem = match_soup.find('p', id='gameResult')
+                
+                if not result_elem:
+                    logger.warning(f"⚠️ DEBUG #{idx}: No gameResult element found")
+                    continue
+                
+                score_text = result_elem.get_text(strip=True)
+                logger.debug(f"📊 DEBUG #{idx}: Found gameResult text: '{score_text}'")
+                
+                # Gestisci "postp" (postponed)
+                if 'postp' in score_text.lower():
+                    logger.info(f"⏸️ DEBUG #{idx}: Match postponed")
+                    results[match_url] = {
+                        'outcome': 'POSTP',
+                        'score': 'Postponed',
+                        'home_goals': None,
+                        'away_goals': None
+                    }
+                    continue
+                
+                # Parse "2 - 0" o "2-0"
+                if '-' in score_text:
+                    parts = score_text.split('-')
+                    if len(parts) == 2:
+                        try:
+                            home_goals = int(parts[0].strip())
+                            away_goals = int(parts[1].strip())
+                            
+                            if home_goals > away_goals:
+                                outcome = '1'
+                            elif home_goals == away_goals:
+                                outcome = 'X'
+                            else:
+                                outcome = '2'
+                            
+                            results[match_url] = {
+                                'outcome': outcome,
+                                'score': f"{home_goals}-{away_goals}",
+                                'home_goals': home_goals,
+                                'away_goals': away_goals
+                            }
+                            
+                            logger.info(f"✅ DEBUG #{idx}: {home_goals}-{away_goals} = {outcome}")
+                        
+                        except ValueError as e:
+                            logger.warning(f"⚠️ DEBUG #{idx}: Cannot parse '{score_text}': {e}")
+                else:
+                    logger.warning(f"⚠️ DEBUG #{idx}: No '-' in score: '{score_text}'")
+            
+            except Exception as e:
+                logger.error(f"❌ DEBUG #{idx}: Error: {e}")
+        
+        logger.info(f"📊 SUMMARY: Found {len(results)}/{len(match_urls)} results")
+        
+        return results

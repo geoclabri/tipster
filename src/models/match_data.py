@@ -116,6 +116,10 @@ class Match:
     league: str
     home_team: str
     away_team: str
+
+    # AGGIUNGI QUESTO CAMPO
+    result: Optional[Dict] = None  # {'outcome': '1'/'X'/'2', 'score': '2-1', 'home_goals': 2, 'away_goals': 1}
+    
     
     # Quote
     odds: Optional[MatchOdds] = None
@@ -132,7 +136,7 @@ class Match:
     home_last_matches: List[Dict] = field(default_factory=list)
     away_last_matches: List[Dict] = field(default_factory=list)
 
-    # === NUOVI CAMPI ===
+    # Dati campionato
     league_statistics: Optional[Dict] = None
     league_standings: List[Dict] = field(default_factory=list)
     head_to_head: List[Dict] = field(default_factory=list)
@@ -272,7 +276,58 @@ class Match:
             'away_last_matches': self.away_last_matches,
             'home_form': self.get_home_form_string(5),
             'away_form': self.get_away_form_string(5),
+            'league_statistics': self.league_statistics,
+            'league_standings': self.league_standings,
+            'head_to_head': self.head_to_head,
         }
+    
+    def to_backtesting_dict(self, prediction=None, actual_result: dict = None) -> dict:
+        """
+        Converte match + prediction in formato per backtesting archive
+        
+        Args:
+            prediction: MatchPrediction object
+            actual_result: {'outcome': '1'/'X'/'2', 'score': '2-1', 'home_goals': 2, 'away_goals': 1}
+        """
+        data = {
+            'match': {
+                'date': self.date.strftime('%Y-%m-%d'),
+                'time': self.time.strftime('%H:%M'),
+                'league': self.league,
+                'home_team': self.home_team,
+                'away_team': self.away_team,
+                'url': self.url
+            },
+            'odds': self.odds.to_dict() if self.odds else {},
+        }
+        
+        # Prediction
+        if prediction:
+            data['prediction'] = {
+                'home_win_prob': prediction.home_win_prob,
+                'draw_prob': prediction.draw_prob,
+                'away_win_prob': prediction.away_win_prob,
+                'home_xg': prediction.home_xg,
+                'away_xg': prediction.away_xg,
+                'total_xg': prediction.total_xg,
+                'confidence_score': prediction.confidence_score,
+                'confidence': prediction.confidence,
+                'prediction_variance': prediction.prediction_variance,
+                'over_2_5_prob': prediction.over_2_5_prob,
+                'bts_yes_prob': prediction.bts_yes_prob,
+                'value_bets': prediction.value_bets,
+                'recommended_bet': prediction.recommended_bet,
+                'home_attack_rating': prediction.home_attack_rating,
+                'home_defense_rating': prediction.home_defense_rating,
+                'away_attack_rating': prediction.away_attack_rating,
+                'away_defense_rating': prediction.away_defense_rating,
+            }
+        
+        # Actual result (se disponibile)
+        if actual_result:
+            data['actual'] = actual_result
+        
+        return data
 
 
 class MatchCollection:
